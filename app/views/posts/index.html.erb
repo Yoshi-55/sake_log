@@ -1,1 +1,17 @@
-<h1 class="text-4xl text-green-700 font-semibold underline">Hello,world</h1>
+<h1 class="text-2xl font-bold mb-4">投稿一覧</h1>
+
+<%= link_to "新規投稿", new_post_path, class: "inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+
+<div class="space-y-4 mt-6">
+  <% @posts.each do |post| %>
+    <div class="border p-4 rounded shadow">
+      <h2 class="text-xl font-semibold">
+        <%= link_to post.title, post_path(post), class: "text-blue-700 hover:underline" %>
+      </h2>
+      <p class="text-gray-600"><%= truncate(post.body, length: 100) %></p>
+      <p class="text-sm text-gray-400 mt-2">
+        作成: <%= l(post.created_at, format: :short) %>
+      </p>
+    </div>
+  <% end %>
+</div>

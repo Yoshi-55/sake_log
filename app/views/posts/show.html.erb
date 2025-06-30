@@ -1,0 +1,8 @@
+<h1 class="text-3xl font-bold mb-4"><%= @post.title %></h1>
+
+<p class="mb-6 whitespace-pre-wrap"><%= @post.body %></p>
+
+<div class="space-x-4">
+  <%= link_to '編集', edit_post_path(@post), class: "text-blue-600 hover:underline" %>
+  <%= link_to '一覧に戻る', posts_path, class: "text-gray-600 hover:underline" %>
+</div>
