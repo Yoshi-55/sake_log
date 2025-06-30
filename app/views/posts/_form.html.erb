@@ -1,0 +1,15 @@
+<%= form_with(model: post) do |form| %>
+  <div class="mb-4">
+    <%= form.label :title, "タイトル", class: "block font-bold mb-1" %>
+    <%= form.text_field :title, class: "w-full border rounded px-3 py-2" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :body, "本文", class: "block font-bold mb-1" %>
+    <%= form.text_area :body, rows: 5, class: "w-full border rounded px-3 py-2" %>
+  </div>
+
+  <div>
+    <%= form.submit "保存", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+  </div>
+<% end %>
