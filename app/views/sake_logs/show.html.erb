@@ -1,0 +1,19 @@
+<div class="w-full md:w-2/3 mx-auto px-4 sm:px-6">
+  <% if notice.present? %>
+    <p id="notice" class="py-2 px-3 bg-green-50 mb-5 text-green-600 font-semibold rounded-md inline-block text-center sm:text-left">
+      <%= notice %>
+    </p>
+  <% end %>
+
+  <h1 class="font-bold text-3xl sm:text-4xl mb-6 text-center sm:text-left">Showing sake log</h1>
+
+  <%= render @sake_log %>
+
+  <div class="mt-6 flex flex-col sm:flex-row sm:items-center gap-3">
+    <%= link_to "Edit this sake log", edit_sake_log_path(@sake_log), class: "rounded-md px-5 py-3 bg-gray-100 hover:bg-gray-50 font-medium text-center w-full sm:w-auto" %>
+
+    <%= link_to "Back to sake logs", sake_logs_path, class: "rounded-md px-5 py-3 bg-gray-100 hover:bg-gray-50 font-medium text-center w-full sm:w-auto" %>
+
+    <%= button_to "Destroy this sake log", @sake_log, method: :delete, data: { confirm: "Are you sure?" }, class: "rounded-md px-5 py-3 bg-red-600 hover:bg-red-500 text-white font-medium w-full sm:w-auto" %>
+  </div>
+</div>
