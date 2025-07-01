@@ -1,0 +1,2 @@
+class SakeLog < ApplicationRecord
+end
