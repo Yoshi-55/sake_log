@@ -3,7 +3,7 @@ class SakeLogsController < ApplicationController
 
   # GET /sake_logs or /sake_logs.json
   def index
-    @sake_logs = SakeLog.all
+    @sake_logs = current_user.sake_logs
   end
 
   # GET /sake_logs/1 or /sake_logs/1.json
@@ -21,7 +21,7 @@ class SakeLogsController < ApplicationController
 
   # POST /sake_logs or /sake_logs.json
   def create
-    @sake_log = SakeLog.new(sake_log_params)
+    @sake_log = current_user.sake_logs.build(sake_log_params)
 
     respond_to do |format|
       if @sake_log.save
@@ -60,11 +60,11 @@ class SakeLogsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sake_log
-      @sake_log = SakeLog.find(params.expect(:id))
+      @sake_log = current_user.sake_logs.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def sake_log_params
-      params.expect(sake_log: [ :name, :taste, :memo ])
+      params.require(:sake_log).permit(:name, :taste, :memo)
     end
 end
