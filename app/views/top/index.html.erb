@@ -1,0 +1,18 @@
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-6 py-12 text-center">
+  <h1 class="text-4xl font-extrabold text-indigo-600 mb-6">
+    最高の日本酒ログ管理アプリへようこそ
+  </h1>
+
+  <p class="max-w-xl text-gray-700 mb-8">
+    日本酒の味わいや思い出を簡単に記録・共有できます。あなたの日本酒ライフをもっと楽しく！
+  </p>
+
+  <div class="space-x-4">
+    <%= link_to "新規登録", new_user_registration_path, class: "px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700" %>
+    <%= link_to "ログイン", new_user_session_path, class: "px-6 py-3 border border-indigo-600 text-indigo-600 rounded-md hover:bg-indigo-700 hover:text-white" %>
+  </div>
+
+  <div class="mt-12 max-w-3xl w-full">
+    <img src="/images/sample_sake_app.png" alt="サービスイメージ" class="mx-auto rounded-lg shadow-md" />
+  </div>
+</div>
