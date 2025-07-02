@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "brands/index"
   devise_for :users
   resources :sake_logs
   get "posts/index"

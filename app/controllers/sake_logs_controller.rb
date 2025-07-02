@@ -1,5 +1,10 @@
+require 'net/http'
+require 'uri'
+require 'json'
+
 class SakeLogsController < ApplicationController
   before_action :set_sake_log, only: %i[ show edit update destroy ]
+  before_action :load_brands, only: %i[new edit]
 
   # GET /sake_logs or /sake_logs.json
   def index
@@ -66,5 +71,18 @@ class SakeLogsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def sake_log_params
       params.require(:sake_log).permit(:name, :taste, :memo)
+    end
+
+    def load_brands
+      url = URI.parse("https://muro.sakenowa.com/sakenowa-data/api/brands")
+      response = Net::HTTP.get_response(url)
+
+      if response.is_a?(Net::HTTPSuccess)
+        data = JSON.parse(response.body)
+        @brands = data["brands"].map { |b| [b["name"], b["name"]] }
+      else
+        @brands = []
+        flash.now[:alert] = "銘柄一覧の取得に失敗しました"
+      end
     end
 end
