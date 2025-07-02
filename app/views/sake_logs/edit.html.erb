@@ -1,10 +1,11 @@
-<% content_for :title, "Editing sake log" %>
+<% content_for :title, "日本酒記録 編集" %>
 
-<div class="md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">Editing sake log</h1>
+<div class="w-full md:w-2/3 mx-auto px-4 sm:px-6">
+  <h1 class="font-bold text-2xl sm:text-4xl mb-6 text-center sm:text-left text-yellow-500">記録編集</h1>
 
   <%= render "form", sake_log: @sake_log %>
 
-  <%= link_to "Show this sake log", @sake_log, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to sake logs", sake_logs_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <div class="mt-4 text-center sm:text-left">
+    <%= link_to "戻る", sake_logs_path, class: "rounded-md px-4 py-2.5 bg-gray-400 hover:bg-gray-300 font-medium inline-block" %>
+  </div>
 </div>

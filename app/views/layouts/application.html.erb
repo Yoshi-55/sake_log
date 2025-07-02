@@ -10,13 +10,20 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body class="bg-gray-900 pt-20 min-h-screen flex flex-col">
-    <%= render "layouts/header" %>
+  <body class="bg-gray-900 min-h-screen flex flex-col">
+  <%= render "layouts/header" %>
 
-    <main class="flex-grow container mx-auto px-4">
-      <%= yield %>
-    </main>
+  <main class="pt-24 sm:pt-32 flex-1">
+  <% if user_signed_in? %>
+    <div class="text-sm text-gray-400 text-right pr-4 mb-4">
+      ようこそ、<%= current_user.email %> さん
+    </div>
+  <% end %>
 
-    <%= render "layouts/footer" %>
-  </body>
+  <%= yield %>
+</main>
+
+  <%= render "layouts/footer" %>
+</body>
+
 </html>

@@ -8,25 +8,25 @@
   <% end %>
 
   <div class="flex justify-between items-center mb-6">
-    <h1 class="font-bold text-3xl sm:text-4xl">Sake logs</h1>
-    <%= link_to "New sake log", new_sake_log_path,
-        class: "rounded-md px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium" %>
+    <h1 class="font-bold text-2xl sm:text-4xl text-gray-50">記録一覧</h1>
+    <%= link_to "＋ 新規作成", new_sake_log_path,
+        class: "rounded-md px-4 py-2.5 bg-yellow-600 hover:bg-yellow-500 text-white font-medium" %>
   </div>
 
   <% if @sake_logs.any? %>
     <div id="sake_logs" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       <% @sake_logs.each do |sake_log| %>
-        <div class="border border-gray-200 rounded-xl shadow-sm p-4 bg-white">
+        <div class="border border-gray-200 rounded-xl shadow-md p-6 bg-gray-800 transition-transform hover:scale-105">
           <%= render sake_log %>
 
-          <div class="mt-3">
-            <%= link_to "Show this sake log", sake_log,
-                class: "mt-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+          <div class="mt-4">
+            <%= link_to "詳細", sake_log,
+                class: "rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 text-gray-50 font-medium inline-block" %>
           </div>
         </div>
       <% end %>
     </div>
   <% else %>
-    <p class="text-center my-10 text-gray-500">No sake logs found.</p>
+    <p class="text-center my-10 text-gray-400">記録なし</p>
   <% end %>
 </div>
