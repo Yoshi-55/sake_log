@@ -25,7 +25,7 @@ class SakeLogsController < ApplicationController
 
     respond_to do |format|
       if @sake_log.save
-        format.html { redirect_to sake_logs_path, notice: "Sake log was successfully created." }
+        format.html { redirect_to sake_logs_path, notice: t("sake_logs.create.success") }
         format.json { render :show, status: :created, location: @sake_log }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class SakeLogsController < ApplicationController
   def update
     respond_to do |format|
       if @sake_log.update(sake_log_params)
-        format.html { redirect_to sake_logs_path, notice: "Sake log was successfully updated." }
+        format.html { redirect_to sake_logs_path, notice: t("sake_logs.update.success") }
         format.json { render :show, status: :ok, location: @sake_log }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class SakeLogsController < ApplicationController
     @sake_log.destroy!
 
     respond_to do |format|
-      format.html { redirect_to sake_logs_path, status: :see_other, notice: "Sake log was successfully destroyed." }
+      format.html { redirect_to sake_logs_path, status: :see_other, notice: t("sake_logs.destroy.success") }
       format.json { head :no_content }
     end
   end
