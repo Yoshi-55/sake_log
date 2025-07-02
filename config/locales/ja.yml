@@ -1,0 +1,9 @@
+ja:
+  sake_logs:
+    create:
+      success: "ログが作成されました"
+    update:
+      success: "ログが更新されました"
+    destroy:
+      success: "ログが削除されました"
+      failure: "ログの削除に失敗しました"
