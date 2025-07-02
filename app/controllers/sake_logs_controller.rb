@@ -1,6 +1,6 @@
-require 'net/http'
-require 'uri'
-require 'json'
+require "net/http"
+require "uri"
+require "json"
 
 class SakeLogsController < ApplicationController
   before_action :set_sake_log, only: %i[ show edit update destroy ]
@@ -79,7 +79,7 @@ class SakeLogsController < ApplicationController
 
       if response.is_a?(Net::HTTPSuccess)
         data = JSON.parse(response.body)
-        @brands = data["brands"].map { |b| [b["name"], b["name"]] }
+        @brands = data["brands"].map { |b| [ b["name"], b["name"] ] }
       else
         @brands = []
         flash.now[:alert] = "銘柄一覧の取得に失敗しました"

@@ -4,3 +4,6 @@ Rails.start()
 
 import "@hotwired/turbo-rails"
 import "./controllers"
+
+import "./brand_autocomplete";
+

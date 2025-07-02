@@ -11,12 +11,16 @@
     </div>
   <% end %>
 
-  <div class="my-5">
-  <%= form.label :name, "銘柄", class: "block font-semibold mb-1 text-gray-50" %>
-  <%= form.select :name, options_for_select(@brands, sake_log.name), { prompt: "銘柄を選択してください" }, 
-      class: ["bg-gray-300 block shadow-sm rounded-md border outline-none px-3 py-3 w-full text-base",
-              {"border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600": sake_log.errors[:name].none?,
-              "border-red-400 focus:border-red-600 focus:ring-1 focus:ring-red-600": sake_log.errors[:name].any?}] %>
+  <div class="my-5 relative">
+    <%= form.label :name, "銘柄", class: "block font-semibold mb-1 text-gray-50" %>
+    <%= form.text_field :name,
+        class: "bg-gray-300 block shadow-sm rounded-md border outline-none px-3 py-3 w-full text-base",
+        id: "brand_name_input",
+        autocomplete: "off" %>
+
+    <ul id="brand_suggestions"
+      class="absolute z-10 w-full bg-white border border-gray-300 shadow-md max-h-48 overflow-y-auto hidden">
+    </ul>
   </div>
 
   <div class="my-5">
