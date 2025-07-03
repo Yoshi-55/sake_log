@@ -8,7 +8,7 @@ class SakeLogsController < ApplicationController
 
   # GET /sake_logs or /sake_logs.json
   def index
-    @sake_logs = current_user.sake_logs
+    @sake_logs = current_user.sake_logs.order(created_at: :desc)
   end
 
   # GET /sake_logs/1 or /sake_logs/1.json

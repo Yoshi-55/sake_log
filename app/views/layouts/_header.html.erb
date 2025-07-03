@@ -1,11 +1,11 @@
 
 <header class="bg-gray-700 shadow p-4 fixed top-0 left-0 w-full z-50">
-  <div class="container mx-auto flex justify-between items-center">
-    <h1 class="text-xl font-bold">
+  <div class="container mx-auto flex items-center">
+    <h1 class="text-xl font-bold flex-shrink-0">
       <%= link_to "🌙 SakeLog", sake_logs_path, class: "text-yellow-500" %>
     </h1>
 
-    <nav class="space-x-4">
+    <nav class="ml-auto space-x-4">
       <% if user_signed_in? %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_method: :delete, confirm: "ログアウトしますか？" }, class: "text-red-500 hover:underline" %>
       <% else %>
