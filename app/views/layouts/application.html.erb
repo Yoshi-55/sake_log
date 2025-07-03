@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "SakeLog" %></title>
+    <title><%= content_for(:title) || "TokkLog." %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,7 +13,7 @@
   <body class="bg-gray-900 min-h-screen flex flex-col">
   <%= render "layouts/header" %>
 
-  <main class="pt-10 sm:pt-10 flex-1">
+  <main class="pt-16 sm:pt-16 flex-1">
   <% if user_signed_in? %>
     <div class="text-sm text-gray-400 text-right pr-4 mb-4">
       ようこそ、<%= current_user.email %> さん
