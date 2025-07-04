@@ -1,7 +1,7 @@
 <%= form_with(model: sake_log, class: "contents max-w-lg mx-auto px-4 sm:px-6") do |form| %>
   <% if sake_log.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-600 px-4 py-3 font-semibold rounded-md mt-3 shadow-sm">
-      <h2 class="text-lg mb-2"><%= pluralize(sake_log.errors.count, "error") %> prohibited this sake_log from being saved:</h2>
+      <h2 class="text-lg mb-2">保存に失敗しました</h2>
 
       <ul class="list-disc ml-6 space-y-1">
         <% sake_log.errors.each do |error| %>
@@ -12,11 +12,12 @@
   <% end %>
 
   <div class="my-5 relative">
-    <%= form.label :name, "銘柄", class: "block font-semibold mb-1 text-gray-50" %>
+    <%= form.label :銘柄, class: "block font-semibold mb-1 text-gray-50" %>
     <%= form.text_field :name,
         class: "bg-gray-300 block shadow-sm rounded-md border outline-none px-3 py-3 w-full text-base",
         id: "brand_name_input",
-        autocomplete: "off" %>
+        autocomplete: "off",
+        maxlength: 30 %>
 
     <ul id="brand_suggestions"
       class="absolute z-10 w-full bg-white border border-gray-300 shadow-md max-h-48 overflow-y-auto hidden">
@@ -24,13 +25,18 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :味, class: "block font-semibold mb-1 text-gray-50" %>
-    <%= form.text_field :taste, class: ["bg-gray-400 block shadow-sm rounded-md border outline-none px-3 py-3 w-full text-base", {"border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600": sake_log.errors[:taste].none?, "border-red-400 focus:border-red-600 focus:ring-1 focus:ring-red-600": sake_log.errors[:taste].any?}] %>
+    <%= form.label :"味(20文字以内)", class: "block font-semibold mb-1 text-gray-50" %>
+    <%= form.text_field :taste,
+    class: ["bg-gray-400 block shadow-sm rounded-md border outline-none px-3 py-3 w-full text-base placeholder:text-black", {"border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600": sake_log.errors[:taste].none?, "border-red-400 focus:border-red-600 focus:ring-1 focus:ring-red-600": sake_log.errors[:taste].any?}],
+    maxlength: 20,
+    placeholder: "例: 辛口、甘口、薫酒、爽酒、醇酒、熟酒、好き、嫌い" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :メモ, class: "block font-semibold mb-1 text-gray-50" %>
-    <%= form.textarea :memo, rows: 4, class: ["bg-gray-500 block shadow-sm rounded-md border outline-none px-3 py-3 w-full text-base", {"border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600": sake_log.errors[:memo].none?, "border-red-400 focus:border-red-600 focus:ring-1 focus:ring-red-600": sake_log.errors[:memo].any?}] %>
+    <%= form.label :"メモ(80文字以内)", class: "block font-semibold mb-1 text-gray-50" %>
+    <%= form.textarea :memo, rows: 4, class: ["bg-gray-500 block shadow-sm rounded-md border outline-none px-3 py-3 w-full text-base placeholder:text-black", {"border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600": sake_log.errors[:memo].none?, "border-red-400 focus:border-red-600 focus:ring-1 focus:ring-red-600": sake_log.errors[:memo].any?}],
+    maxlength: 80,
+    placeholder: "例: 名前に惹かれて呑んでみた、カルピスで割ったら美味かった" %>
   </div>
 
   <div class="text-center">

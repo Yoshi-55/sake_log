@@ -22,4 +22,8 @@ ja:
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード確認"
+      sake_log:
+        name: "銘柄"
+        taste: "味"
+        memo: "メモ"
 
