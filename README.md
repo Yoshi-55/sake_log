@@ -21,4 +21,3 @@ TOKK_LOG.は日本酒の銘柄やテイスティング記録を管理できるWe
 ## ブランド名オートコンプリートについて
 ブランド名入力欄でAPIから取得した候補をサジェスト表示します。
 詳細は `app/javascript/brand_autocomplete.js` および該当Viewをご参照ください。
-外部データ:さけのわデータ(https://sakenowa.com)を利用して銘柄(Brand)を取得しています。
