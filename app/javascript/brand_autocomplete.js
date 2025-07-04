@@ -32,7 +32,8 @@ document.addEventListener("turbo:load", () => {
     }
 
     const brands = await fetchBrands();
-    const matches = brands.filter(b => b.includes(val)).slice(0, 10);
+    const matches = brands.filter(b => b.toLowerCase().includes(val.toLowerCase())).slice(0, 20);
+
 
     if (matches.length === 0) {
       suggestionBox.classList.add("hidden");
@@ -42,9 +43,10 @@ document.addEventListener("turbo:load", () => {
     matches.forEach(b => {
       const li = document.createElement("li");
       li.textContent = b;
-      li.className = "px-4 py-2 hover:bg-yellow-200 cursor-pointer";
+      li.className = "px-4 py-2 hover:bg-yellow-200 cursor-pointer transition-colors duration-150";
       li.addEventListener("click", () => {
         input.value = b;
+        suggestionBox.innerHTML = "";
         suggestionBox.classList.add("hidden");
       });
       suggestionBox.appendChild(li);
