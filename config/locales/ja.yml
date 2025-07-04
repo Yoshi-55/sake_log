@@ -7,3 +7,19 @@ ja:
     destroy:
       success: "ログが削除されました"
       failure: "ログの削除に失敗しました"
+  errors:
+    format: "%{attribute}%{message}"
+    messages:
+      taken: "%{value}はすでに使用されています"
+      blank: "を入力してください"
+      too_short: "は%{count}文字以上で入力してください"
+      too_long: "は%{count}文字以内で入力してください"
+      invalid: "は不正な値です"
+  activerecord:
+    attributes:
+      user:
+        name: "ユーザー名"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+

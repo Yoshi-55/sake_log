@@ -1,5 +1,26 @@
 <div class="min-h-screen flex items-center justify-center bg-gray-800 py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8 bg-gray-300 p-8 rounded-lg shadow-md">
+
+    <% flash.each do |key, message| %>
+      <p class="
+        py-2 px-3 mb-5 font-medium rounded-md inline-block
+        <%= key == 'notice' ? 'bg-green-50 text-green-500' : '' %>
+        <%= key == 'alert' ? 'bg-red-50 text-red-500' : '' %>
+      ">
+        <%= message %>
+      </p>
+    <% end %>
+
+    <% if resource.errors.any? %>
+      <div class="mb-5 bg-red-50 text-red-600 p-3 rounded-md">
+        <ul class="list-disc pl-5">
+          <% resource.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <h2 class="text-center text-3xl font-extrabold text-gray-900">ログイン</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -14,25 +35,14 @@
           <%= f.password_field :password, autocomplete: "current-password", required: true, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" %>
         </div>
 
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <%= f.check_box :remember_me, class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" %>
-            <%= f.label :remember_me, "ログイン状態を保持", class: "ml-2 block text-sm text-gray-900" %>
-          </div>
-
-          <%# <div class="text-sm">
-            <%= link_to "パスワードを忘れた場合", new_password_path(resource_name), class: "font-medium text-yellow-600 hover:text-yellow-500" %>
-          <%# </div> %>
-        </div>
-
         <div>
-          <%= f.submit "ログイン", class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" %>
+          <%= f.submit "ログインする", class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" %>
         </div>
       </div>
     <% end %>
 
     <p class="mt-4 text-center text-sm text-gray-600">
-      アカウントをお持ちでないですか？
+      アカウントをお持ちでない方は
       <%= link_to "新規登録", new_registration_path(resource_name), class: "font-medium text-yellow-600 hover:text-yellow-500" %>
     </p>
   </div>

@@ -1,4 +1,9 @@
 ja:
+  activerecord:
+    models:
+      user:
+        one: "ユーザー"
+        other: "ユーザー"
   devise:
     confirmations:
       confirmed: "メールアドレスの確認が完了しました。"
