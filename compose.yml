@@ -27,6 +27,11 @@ services:
       - node_modules:/myapp/node_modules
     environment:
       TZ: Asia/Tokyo
+      PGHOST: db
+      PGUSER: postgres
+      PGPASSWORD: password
+      PGDATABASE: myapp_development
+      PGPORT: 5432
     ports:
       - "3000:3000"
     depends_on:
