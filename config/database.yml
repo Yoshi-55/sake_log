@@ -92,3 +92,8 @@ cable:
 queue:
   <<: *default
   url: <%= ENV['QUEUE_DATABASE_URL'] || ENV['DATABASE_URL'] %>
+
+cache:
+  <<: *default
+  database: myapp_cache_development
+
