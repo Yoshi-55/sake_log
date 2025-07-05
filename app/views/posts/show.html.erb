@@ -1,0 +1,11 @@
+<h1 class="text-xl font-bold mb-4">投稿詳細</h1>
+<div class="bg-gray-100 p-4 rounded shadow mb-4">
+  <div class="text-gray-800 whitespace-pre-line"><%= @post.body %></div>
+  <div class="text-sm text-gray-500 mt-2">
+    投稿者: <%= @post.user.nickname if @post.user %> ／ <%= l(@post.created_at, format: :short) %>
+    <% if @post.sake_log %>
+      ／ <%= link_to '元の記録を見る', sake_log_path(@post.sake_log), class: 'text-blue-600 underline' %>
+    <% end %>
+  </div>
+</div>
+<%= link_to '掲示板一覧へ戻る', posts_path, class: 'text-yellow-700 underline' %>

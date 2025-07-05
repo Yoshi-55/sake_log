@@ -21,6 +21,8 @@
   <%= button_to "削除", @sake_log, method: :delete,
       data: { confirm: "本当に削除しますか？" },
       class: "rounded-md px-5 py-3 bg-red-600 hover:bg-red-500 text-white font-medium text-center w-full sm:w-auto" %>
+
+  <%= link_to '掲示板にシェア', new_post_path(sake_log_id: @sake_log.id), class: 'px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700' %>
 </div>
 
 </div>

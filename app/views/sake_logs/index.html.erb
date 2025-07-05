@@ -19,9 +19,11 @@
         <div class="border border-gray-200 rounded-xl shadow-md p-6 bg-gray-800 transition-transform hover:scale-105">
           <%= render sake_log %>
 
-          <div class="mt-4">
+          <div class="mt-4 flex gap-2">
             <%= link_to "詳細", sake_log,
                 class: "rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 text-gray-50 font-medium inline-block" %>
+            <%= link_to '掲示板にシェア', new_post_path(sake_log_id: sake_log.id),
+                class: 'rounded-md px-4 py-2 bg-yellow-600 hover:bg-yellow-500 text-white font-medium inline-block' %>
           </div>
         </div>
       <% end %>
