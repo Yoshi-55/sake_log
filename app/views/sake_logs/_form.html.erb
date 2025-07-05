@@ -36,7 +36,7 @@
     <%= form.label :"メモ(80文字以内)", class: "block font-semibold mb-1 text-gray-50" %>
     <%= form.textarea :memo, rows: 4, class: ["bg-gray-500 block shadow-sm rounded-md border outline-none px-3 py-3 w-full text-base placeholder:text-black", {"border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600": sake_log.errors[:memo].none?, "border-red-400 focus:border-red-600 focus:ring-1 focus:ring-red-600": sake_log.errors[:memo].any?}],
     maxlength: 80,
-    placeholder: "例: 名前に惹かれて呑んでみた、カルピスで割ったら美味かった" %>
+    placeholder: "例: 名前に惹かれて呑んでみた" %>
   </div>
 
   <div class="text-center">
