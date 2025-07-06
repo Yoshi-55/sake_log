@@ -8,7 +8,7 @@ class PostsController < ApplicationController
       q = "%#{params[:q]}%"
       @posts = @posts.where('brand LIKE ? OR taste LIKE ? OR memo LIKE ?', q, q, q)
     end
-    @posts = @posts.order(created_at: :desc)
+    @posts = @posts.order(created_at: :desc).page(params[:page]).per(30)
   end
 
   def show
