@@ -29,6 +29,11 @@
           <span class="ml-1 text-pink-600 font-bold align-middle like-count"><%= @post.likes.count %></span>
         <% end %>
         <%= link_to '掲示板一覧へ戻る', posts_path, class: 'px-3 sm:px-4 py-1 bg-gradient-to-r from-pink-500 to-yellow-400 text-white rounded-full hover:from-pink-400 hover:to-yellow-300 font-bold text-xs sm:text-sm shadow' %>
+        <%= link_to 'Xでシェア',
+          "https://twitter.com/intent/tweet?text=#{ERB::Util.url_encode("【日本酒記録】\n銘柄: #{@post.brand}\n味: #{@post.taste}\nメモ: #{@post.memo}\n#TokkLog")}&url=#{CGI.escape(request.original_url)}",
+          target: '_blank', rel: 'noopener',
+          class: 'px-3 sm:px-4 py-1 bg-black text-white rounded-full font-bold text-xs sm:text-sm shadow hover:bg-gray-800 ml-2',
+          title: 'X（旧Twitter）でシェア' %>
         <% if user_signed_in? && @post.user == current_user %>
           <%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'px-3 sm:px-4 py-1 bg-gray-100 text-pink-600 rounded-full border border-pink-200 font-bold hover:bg-pink-50 text-xs sm:text-sm' %>
         <% end %>
