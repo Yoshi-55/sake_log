@@ -4,5 +4,5 @@ class SakeLog < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 30 }
   validates :taste, length: { maximum: 20 }
-  validates :memo, length: { maximum: 80 }
+  validates :memo, length: { maximum: 40 }
 end
