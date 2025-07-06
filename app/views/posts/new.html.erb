@@ -1,12 +1,27 @@
-<h1 class="text-xl font-bold mb-4">新規投稿</h1>
-<%= form_with(model: @post, local: true) do |form| %>
-  <div class="mb-4">
-    <%= form.label :body, "内容", class: "block font-semibold mb-1" %>
-    <%= form.text_area :body, rows: 6, class: "w-full p-2 border rounded" %>
-  </div>
-  <%= form.hidden_field :sake_log_id %>
-  <div class="mb-4">
-    <%= form.submit "投稿する", class: "px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700" %>
-    <%= link_to '戻る', posts_path, class: 'ml-4 text-yellow-700 underline' %>
-  </div>
-<% end %>
+<h1 class="text-3xl font-extrabold mb-8 text-pink-600 tracking-wide text-center" style="font-family:sans-serif; letter-spacing:0.1em;">新規投稿</h1>
+<div class="max-w-lg mx-auto bg-white border border-pink-200 rounded-2xl shadow-lg p-8">
+  <%= form_with(model: @post, local: true) do |form| %>
+    <% if @post.sake_log.present? %>
+      <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded text-blue-700 text-sm">
+        日本酒記録から「銘柄・味・メモ」を自動入力しました。
+      </div>
+    <% end %>
+    <div class="mb-6">
+      <%= form.label :brand, "銘柄", class: "block font-bold mb-2 text-pink-600 text-lg" %>
+      <%= form.text_field :brand, value: @post.brand, class: "w-full p-4 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-400 text-gray-800 text-base", placeholder: "例：獺祭" %>
+    </div>
+    <div class="mb-6">
+      <%= form.label :taste, "味", class: "block font-bold mb-2 text-pink-600 text-lg" %>
+      <%= form.text_field :taste, value: @post.taste, class: "w-full p-4 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-400 text-gray-800 text-base", placeholder: "例：フルーティー" %>
+    </div>
+    <div class="mb-6">
+      <%= form.label :memo, "メモ", class: "block font-bold mb-2 text-pink-600 text-lg" %>
+      <%= form.text_area :memo, value: @post.memo, rows: 2, class: "w-full p-4 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-400 text-gray-800 text-base", placeholder: "例：冷やして飲むと美味しい" %>
+    </div>
+    <%= form.hidden_field :sake_log_id %>
+    <div class="flex gap-4 justify-center">
+      <%= form.submit "投稿する", class: "px-6 py-2 bg-gradient-to-r from-pink-500 to-yellow-400 text-white rounded-full shadow hover:from-pink-400 hover:to-yellow-300 font-bold tracking-widest" %>
+      <%= link_to '戻る', posts_path, class: 'px-6 py-2 bg-gray-100 text-pink-600 rounded-full border border-pink-200 font-bold hover:bg-pink-50' %>
+    </div>
+  <% end %>
+</div>

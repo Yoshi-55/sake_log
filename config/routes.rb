@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :sake_logs
 
-  resources :posts, only: [:index, :show, :new, :create]
+  resources :posts, only: [:index, :show, :new, :create, :destroy]
 
   get "/api/brands", to: "brands#proxy"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

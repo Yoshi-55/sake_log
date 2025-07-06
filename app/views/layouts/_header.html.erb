@@ -5,7 +5,8 @@
       <%= link_to "🌙TOKK LOG.", sake_logs_path, class: "text-yellow-500" %>
     </h1>
 
-    <nav class="ml-auto space-x-4">
+    <nav class="ml-auto space-x-4 flex items-center">
+      <%= link_to "掲示板", posts_path, class: "text-yellow-400 hover:underline font-semibold" %>
       <% if user_signed_in? %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_method: :delete, confirm: "ログアウトしますか？" }, class: "text-red-500 hover:underline" %>
       <% else %>
