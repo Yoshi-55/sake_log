@@ -22,4 +22,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "top#index"
+
+  get '/guide', to: 'top#guide', as: :guide
+  get '/howto', to: 'top#howto', as: :howto
 end

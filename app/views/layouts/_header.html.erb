@@ -18,6 +18,9 @@
 
     <nav id="main-nav" class="fixed top-16 right-0 w-48 bg-gray-700 z-50 flex-col items-center hidden rounded-b-xl shadow-lg">
       <div class="flex flex-col items-center space-y-2 my-4">
+        <%= link_to "TOPに戻る", root_path, class: "text-yellow-400 hover:underline font-bold" %>
+        <%= link_to "🍶選び方ガイド🔰", guide_path, class: "text-blue-400 hover:underline font-bold" %>
+        <%= link_to "このアプリの使い方", howto_path, class: "text-green-500 hover:underline font-bold" %>
         <% if user_signed_in? %>
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_method: :delete, confirm: "ログアウトしますか？" }, class: "text-red-500 hover:underline text-xs px-2 py-1" %>
         <% else %>
