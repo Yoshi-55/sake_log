@@ -7,3 +7,6 @@ import "./controllers"
 
 import "./brand_autocomplete";
 
+import "./like_animation";
+import "./like_ajax";
+

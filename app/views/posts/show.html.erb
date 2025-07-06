@@ -16,6 +16,18 @@
         <span class="font-bold text-pink-600">メモ：</span><%= @post.memo %>
       </div>
       <div class="flex gap-4 mt-2 items-center">
+        <%= form_with url: like_post_path(@post), method: :post, local: false, data: { remote: false } do %>
+          <% if user_signed_in? %>
+            <% if @post.likes.exists?(user: current_user) %>
+              <button type="submit" class="bg-transparent border-none text-pink-400 text-2xl" title="いいね解除">♥</button>
+            <% else %>
+              <button type="submit" class="bg-transparent border-none text-gray-400 text-2xl hover:text-pink-400" title="いいね">♥</button>
+            <% end %>
+          <% else %>
+            <span class="text-gray-300 text-2xl">♥</span>
+          <% end %>
+          <span class="ml-1 text-pink-600 font-bold align-middle like-count"><%= @post.likes.count %></span>
+        <% end %>
         <%= link_to '掲示板一覧へ戻る', posts_path, class: 'px-4 py-1 bg-gradient-to-r from-pink-500 to-yellow-400 text-white rounded-full hover:from-pink-400 hover:to-yellow-300 font-bold text-sm shadow' %>
         <% if user_signed_in? && @post.user == current_user %>
           <%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'px-4 py-1 bg-gray-100 text-pink-600 rounded-full border border-pink-200 font-bold hover:bg-pink-50 text-sm' %>
