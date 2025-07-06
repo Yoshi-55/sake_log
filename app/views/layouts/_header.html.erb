@@ -1,17 +1,22 @@
 
 <header class="bg-gray-700 shadow p-4 fixed top-0 left-0 w-full z-50">
   <div class="container mx-auto flex items-center">
-    <h1 class="text-xl font-bold flex-shrink-0">
+    <h1 class="text-xl font-bold flex-shrink-0 mr-1 sm:mr-2 lg:mr-3">
       <%= link_to "🌙TOKK LOG.", sake_logs_path, class: "text-yellow-500" %>
     </h1>
 
-    <nav class="ml-auto space-x-4">
-      <% if user_signed_in? %>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_method: :delete, confirm: "ログアウトしますか？" }, class: "text-red-500 hover:underline" %>
-      <% else %>
-        <%= link_to "ログイン", new_user_session_path, class: "text-yellow-600 hover:underline" %>
-        <%= link_to "新規登録", new_user_registration_path, class: "text-yellow-600 hover:underline" %>
-      <% end %>
+    <nav class="ml-auto flex items-center w-full">
+      <div class="flex-shrink-0 mr-6 sm:mr-8 lg:mr-12">
+        <%= link_to "掲示板", posts_path, class: "px-4 py-1 bg-gradient-to-r from-pink-500 to-yellow-400 text-white rounded-full shadow font-bold text-sm hover:from-pink-400 hover:to-yellow-300 transition" %>
+      </div>
+      <div class="flex ml-auto space-x-4 items-center">
+        <% if user_signed_in? %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_method: :delete, confirm: "ログアウトしますか？" }, class: "text-red-500 hover:underline text-xs px-2 py-1" %>
+        <% else %>
+          <%= link_to "ログイン", new_user_session_path, class: "text-yellow-600 hover:underline" %>
+          <%= link_to "新規登録", new_user_registration_path, class: "text-yellow-600 hover:underline" %>
+        <% end %>
+      </div>
     </nav>
   </div>
 </header>

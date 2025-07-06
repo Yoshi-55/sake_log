@@ -26,4 +26,7 @@ ja:
         name: "銘柄"
         taste: "味"
         memo: "メモ"
+  time:
+    formats:
+      short: "%m/%d %H:%M"
 

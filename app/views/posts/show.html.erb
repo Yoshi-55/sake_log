@@ -1,0 +1,43 @@
+<div class="flex flex-col items-center">
+  <div class="w-full max-w-md sm:max-w-lg md:max-w-xl bg-white border border-pink-200 rounded-2xl shadow-lg p-0 mt-6 sm:mt-8">
+    <div class="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 pt-4 sm:pt-5 pb-2">
+      <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-pink-400 to-yellow-300 flex items-center justify-center text-xl sm:text-2xl text-white font-bold shadow">
+        <%= (@post.user&.name.presence || 'U').first %>
+      </div>
+      <div>
+        <div class="font-bold text-pink-600 text-sm sm:text-base"><%= @post.user&.name || '匿名' %></div>
+        <div class="text-xs text-gray-400">@user<%= @post.user_id %>・<%= l(@post.created_at, format: :short) %></div>
+      </div>
+    </div>
+    <div class="px-3 sm:px-5 pb-3 sm:pb-4">
+      <div class="text-gray-800 whitespace-pre-line mb-2 text-base sm:text-lg" style="font-family:sans-serif;">
+        <span class="font-bold text-pink-600">銘柄：</span><%= @post.brand %><br>
+        <span class="font-bold text-pink-600">味：</span><%= @post.taste %><br>
+        <span class="font-bold text-pink-600">メモ：</span><%= @post.memo %>
+      </div>
+      <div class="flex gap-2 sm:gap-4 mt-2 items-center flex-wrap">
+        <%= form_with url: like_post_path(@post), method: :post, local: false, data: { remote: false } do %>
+          <% if user_signed_in? %>
+            <% if @post.likes.exists?(user: current_user) %>
+              <button type="submit" class="bg-transparent border-none text-pink-400 text-2xl" title="いいね解除">♥</button>
+            <% else %>
+              <button type="submit" class="bg-transparent border-none text-gray-400 text-2xl hover:text-pink-400" title="いいね">♥</button>
+            <% end %>
+          <% else %>
+            <span class="text-gray-300 text-2xl">♥</span>
+          <% end %>
+          <span class="ml-1 text-pink-600 font-bold align-middle like-count"><%= @post.likes.count %></span>
+        <% end %>
+        <%= link_to '掲示板一覧へ戻る', posts_path, class: 'px-3 sm:px-4 py-1 bg-gradient-to-r from-pink-500 to-yellow-400 text-white rounded-full hover:from-pink-400 hover:to-yellow-300 font-bold text-xs sm:text-sm shadow' %>
+        <%= link_to 'Xでシェア',
+          "https://twitter.com/intent/tweet?text=#{ERB::Util.url_encode("【日本酒記録】\n銘柄: #{@post.brand}\n味: #{@post.taste}\nメモ: #{@post.memo}\n#TokkLog")}&url=#{CGI.escape(request.original_url)}",
+          target: '_blank', rel: 'noopener',
+          class: 'px-3 sm:px-4 py-1 bg-black text-white rounded-full font-bold text-xs sm:text-sm shadow hover:bg-gray-800 ml-2',
+          title: 'X（旧Twitter）でシェア' %>
+        <% if user_signed_in? && @post.user == current_user %>
+          <%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'px-3 sm:px-4 py-1 bg-gray-100 text-pink-600 rounded-full border border-pink-200 font-bold hover:bg-pink-50 text-xs sm:text-sm' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
