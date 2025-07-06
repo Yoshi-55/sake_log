@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_post, only: [:show]
+  before_action :authenticate_user!, except: [ :index, :show ]
+  before_action :set_post, only: [ :show ]
 
   def index
     @posts = Post.includes(:user, :sake_log)
     if params[:q].present?
       q = "%#{params[:q]}%"
-      @posts = @posts.where('brand LIKE ? OR taste LIKE ? OR memo LIKE ?', q, q, q)
+      @posts = @posts.where("brand LIKE ? OR taste LIKE ? OR memo LIKE ?", q, q, q)
     end
     @posts = @posts.order(created_at: :desc).page(params[:page]).per(30)
   end
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to @post, notice: '掲示板に投稿しました。'
+      redirect_to @post, notice: "掲示板に投稿しました。"
     else
       render :new, status: :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
   def destroy
     @post = current_user.posts.find(params[:id])
     @post.destroy
-    redirect_to posts_path, notice: '投稿を削除しました。'
+    redirect_to posts_path, notice: "投稿を削除しました。"
   end
 
   def like

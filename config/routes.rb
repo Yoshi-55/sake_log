@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :sake_logs
 
-  resources :posts, only: [:index, :show, :new, :create, :destroy] do
+  resources :posts, only: [ :index, :show, :new, :create, :destroy ] do
     member do
       post :like
     end
@@ -23,6 +23,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "top#index"
 
-  get '/guide', to: 'top#guide', as: :guide
-  get '/howto', to: 'top#howto', as: :howto
+  get "/guide", to: "top#guide", as: :guide
+  get "/howto", to: "top#howto", as: :howto
 end
