@@ -1,12 +1,13 @@
 <header class="bg-gray-700 shadow p-4 fixed top-0 left-0 w-full z-50">
   <div class="container mx-auto flex items-center">
-    <h1 class="text-xl font-bold flex-shrink-0 mr-1 sm:mr-2 lg:mr-3">
+    <h1 class="text-5xl font-bold flex-shrink-0 mr-1 sm:mr-2 lg:mr-3">
       <%= link_to "🌙TOKK LOG.", sake_logs_path, class: "text-yellow-500" %>
     </h1>
 
-    <!-- 掲示板ボタンは常時表示 -->
-    <div class="flex-shrink-0 ml-auto mr-2">
-      <%= link_to "掲示板", posts_path, class: "px-6 py-2 bg-gradient-to-r from-pink-500 to-yellow-400 text-white rounded-full shadow-lg font-extrabold text-base tracking-wide border-2 border-pink-300 hover:from-pink-400 hover:to-yellow-300 hover:scale-105 transition-all duration-150" %>
+    <!-- ナビゲーションボタン -->
+    <div class="flex-shrink-0 ml-auto mr-2 flex gap-2">
+      <%= link_to "記録一覧", sake_logs_path, class: "px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-400 text-white rounded-full shadow-lg font-bold text-base tracking-wide border-2 border-blue-300 hover:from-blue-400 hover:to-cyan-300 hover:scale-105 transition-all duration-150" %>
+      <%= link_to "掲示板", posts_path, class: "px-6 py-3 bg-gradient-to-r from-pink-500 to-yellow-400 text-white rounded-full shadow-lg font-bold text-base tracking-wide border-2 border-pink-300 hover:from-pink-400 hover:to-yellow-300 hover:scale-105 transition-all duration-150" %>
     </div>
 
     <!-- ハンバーガーメニュー（全画面表示） -->

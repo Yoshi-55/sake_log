@@ -7,7 +7,7 @@
     </p>
   <% end %>
 
-  <div class="flex justify-between items-center mb-6">
+  <div class="flex items-center gap-4 mb-6">
     <h1 class="font-bold text-2xl sm:text-4xl text-gray-50">記録一覧</h1>
     <%= link_to "＋ 新規作成", new_sake_log_path,
         class: "rounded-md px-4 py-2.5 bg-yellow-600 hover:bg-yellow-500 text-white font-medium" %>
@@ -16,14 +16,15 @@
   <% if @sake_logs.any? %>
     <div id="sake_logs" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       <% @sake_logs.each do |sake_log| %>
-        <div class="border border-gray-200 rounded-xl shadow-md p-6 bg-gray-800 transition-transform hover:scale-105">
-          <%= render sake_log %>
-
-          <div class="mt-4 flex gap-2">
+        <div class="border border-gray-200 rounded-xl shadow-md bg-gray-800 transition-transform hover:scale-105 relative h-64 flex flex-col">
+          <div class="p-6 flex-1 overflow-hidden">
+            <%= render sake_log %>
+          </div>
+          <div class="p-4 flex gap-2">
             <%= link_to "詳細", sake_log,
-                class: "rounded-md px-4 py-2 bg-gray-600 hover:bg-gray-500 text-gray-50 font-medium inline-block" %>
-            <%= link_to '掲示板にシェア', new_post_path(sake_log_id: sake_log.id),
-                class: 'rounded-md px-4 py-2 bg-yellow-600 hover:bg-yellow-500 text-white font-medium inline-block' %>
+                class: "flex-1 text-center rounded-md px-3 py-2 bg-gray-600 hover:bg-gray-500 text-gray-50 font-medium text-sm" %>
+            <%= link_to "掲示板にシェア", new_post_path(sake_log_id: sake_log.id),
+                class: "flex-1 text-center rounded-md px-3 py-2 bg-yellow-600 hover:bg-yellow-500 text-white font-medium text-sm" %>
           </div>
         </div>
       <% end %>
