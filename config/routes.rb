@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :sake_logs
 
   resources :posts, only: [ :index, :show, :new, :create, :destroy ] do
-    resources :likes, only: [:create]
+    resources :likes, only: [ :create ]
   end
 
   get "/api/brands", to: "brands#proxy"
