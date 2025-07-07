@@ -16,7 +16,7 @@
         <span class="font-bold text-pink-600">メモ：</span><%= @post.memo %>
       </div>
       <div class="flex gap-2 sm:gap-4 mt-2 items-center flex-wrap">
-        <%= form_with url: like_post_path(@post), method: :post, local: false, data: { remote: false } do %>
+        <%= form_with url: post_likes_path(@post), method: :post, local: false, data: { remote: false } do %>
           <% if user_signed_in? %>
             <% if @post.likes.exists?(user: current_user) %>
               <button type="submit" class="bg-transparent border-none text-pink-400 text-2xl" title="いいね解除">♥</button>

@@ -16,7 +16,7 @@
 <div class="max-w-6xl mx-auto px-2 sm:px-4 md:px-8">
   <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
     <% @posts.each do |post| %>
-      <li class="bg-white border border-pink-200 rounded-2xl shadow-lg p-0 flex flex-col transition-transform duration-200 hover:scale-[1.02]">
+      <li class="bg-white border border-pink-200 rounded-2xl shadow-lg p-0 flex flex-col h-80 transition-transform duration-200 hover:scale-[1.02]">
         <div class="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 pt-4 sm:pt-5 pb-2">
           <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-pink-400 to-yellow-300 flex items-center justify-center text-xl sm:text-2xl text-white font-bold shadow">
             <%= (post.user.name.presence || 'U').first %>
@@ -26,14 +26,20 @@
             <div class="text-xs text-gray-400">@user<%= post.user_id %>・<%= l(post.created_at, format: :short) %></div>
           </div>
         </div>
-        <div class="px-3 sm:px-5 pb-3 sm:pb-4">
-          <div class="text-gray-800 whitespace-pre-line mb-2 text-base sm:text-lg" style="font-family:sans-serif;">
-            <span class="font-bold text-pink-600">銘柄：</span><%= post.brand %><br>
-            <span class="font-bold text-pink-600">味：</span><%= post.taste %><br>
-            <span class="font-bold text-pink-600">メモ：</span><%= truncate(post.memo, length: 100) %>
+        <div class="px-3 sm:px-5 pb-3 sm:pb-4 flex-1 flex flex-col">
+          <div class="text-gray-800 mb-2 text-sm sm:text-base flex-1 overflow-hidden break-words" style="font-family:sans-serif; word-wrap: break-word; overflow-wrap: break-word;">
+            <div class="mb-2">
+              <span class="font-bold text-pink-600">銘柄：</span><%= post.brand %>
+            </div>
+            <div class="mb-2">
+              <span class="font-bold text-pink-600">味：</span><%= post.taste %>
+            </div>
+            <div>
+              <span class="font-bold text-pink-600">メモ：</span><%= truncate(post.memo, length: 80) %>
+            </div>
           </div>
-          <div class="flex gap-2 sm:gap-4 mt-2 items-center flex-wrap">
-            <%= form_with url: like_post_path(post), method: :post, local: false, data: { remote: false } do %>
+          <div class="flex gap-2 sm:gap-4 mt-auto items-center flex-wrap">
+            <%= form_with url: post_likes_path(post), method: :post, local: false, data: { remote: false } do %>
               <% if user_signed_in? %>
                 <% if post.likes.exists?(user: current_user) %>
                   <button type="submit" class="bg-transparent border-none text-pink-400 text-2xl" title="いいね解除">♥</button>

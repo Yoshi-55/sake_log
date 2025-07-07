@@ -6,17 +6,22 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- ファビコン設定 -->
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <link rel="apple-touch-icon" href="/icon.png" />
+    <link rel="shortcut icon" href="/icon.png" />
+
     <!-- OGP設定 -->
     <meta property="og:title" content="TokkLog. 日本酒記録＆掲示板アプリ" />
     <meta property="og:description" content="日本酒の記録・シェア・掲示板ができるTokkLog（トックログ）。みんなのおすすめ銘柄や味の感想をシェアしよう！" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://tokklog.com/" />
-    <meta property="og:image" content="/assets/ogp.png" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:image" content="<%= request.base_url %>/ogp.png" />
     <meta property="og:site_name" content="TokkLog." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="TokkLog. 日本酒記録＆掲示板アプリ" />
     <meta name="twitter:description" content="日本酒の記録・シェア・掲示板ができるTokkLog（トックログ）。みんなのおすすめ銘柄や味の感想をシェアしよう！" />
-    <meta name="twitter:image" content="/assets/ogp.png" />
+    <meta name="twitter:image" content="<%= request.base_url %>/ogp.png" />
 
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
@@ -27,7 +32,7 @@
 
   <main class="pt-16 sm:pt-16 flex-1">
   <% if user_signed_in? %>
-    <div class="text-sm text-gray-400 text-right pr-4 mb-4">
+    <div class="text-xl text-gray-400 text-right pr-4 mb-4 mt-6">
       🌙ようこそ、<%= current_user.name %> さん🍶
     </div>
   <% end %>
