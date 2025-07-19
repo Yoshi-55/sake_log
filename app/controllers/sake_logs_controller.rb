@@ -1,30 +1,21 @@
-require "net/http"
-require "uri"
-require "json"
-
 class SakeLogsController < ApplicationController
   before_action :set_sake_log, only: %i[ show edit update destroy ]
   before_action :load_brands, only: %i[new edit]
 
-  # GET /sake_logs or /sake_logs.json
   def index
-    @sake_logs = current_user.sake_logs.order(created_at: :desc)
+    @sake_logs = current_user.sake_logs.recent
   end
 
-  # GET /sake_logs/1 or /sake_logs/1.json
   def show
   end
 
-  # GET /sake_logs/new
   def new
     @sake_log = SakeLog.new
   end
 
-  # GET /sake_logs/1/edit
   def edit
   end
 
-  # POST /sake_logs or /sake_logs.json
   def create
     @sake_log = current_user.sake_logs.build(sake_log_params)
 
@@ -39,7 +30,6 @@ class SakeLogsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /sake_logs/1 or /sake_logs/1.json
   def update
     respond_to do |format|
       if @sake_log.update(sake_log_params)
@@ -52,7 +42,6 @@ class SakeLogsController < ApplicationController
     end
   end
 
-  # DELETE /sake_logs/1 or /sake_logs/1.json
   def destroy
     @sake_log.destroy!
 
@@ -63,26 +52,17 @@ class SakeLogsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sake_log
-      @sake_log = current_user.sake_logs.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def sake_log_params
-      params.require(:sake_log).permit(:name, :taste, :memo)
-    end
+  def set_sake_log
+    @sake_log = current_user.sake_logs.find(params[:id])
+  end
 
-    def load_brands
-      url = URI.parse("https://muro.sakenowa.com/sakenowa-data/api/brands")
-      response = Net::HTTP.get_response(url)
+  def sake_log_params
+    params.require(:sake_log).permit(:name, :taste, :memo)
+  end
 
-      if response.is_a?(Net::HTTPSuccess)
-        data = JSON.parse(response.body)
-        @brands = data["brands"].map { |b| [ b["name"], b["name"] ] }
-      else
-        @brands = []
-        flash.now[:alert] = "銘柄一覧の取得に失敗しました"
-      end
-    end
+  def load_brands
+    @brands = BrandService.fetch_brands
+    flash.now[:alert] = "銘柄一覧の取得に失敗しました" if @brands.empty?
+  end
 end

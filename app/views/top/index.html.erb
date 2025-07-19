@@ -1,25 +1,76 @@
-<div class="min-h-screen flex flex-col items-center justify-center bg-gray-800 px-6 py-12 text-center">
-  <h1 class="text-3xl font-extrabold text-yellow-500 mb-6">
-    🍶日本酒ログ管理アプリへようこそ🌙
-  </h1>
-  <h2 class="text-xl font-extrabold text-yellow-600 mb-6">
-    日本酒を周りの評価や意見を気にせず、自分だけの気軽なメモとして使えるシンプルな記録アプリ。<br>評価やコメントを最低限にして、誰でも続けやすく日本酒の敷居を下げることを目指しています。
-  </h2>
-  <ul class="max-w-xl text-left text-gray-200 list-disc list-inside mb-8">
-    <li>シンプルな記録機能</li>
-    <li>銘柄、味、メモをスマホからちゃちゃっと記録</li>
-    <li>薄暗い店でも眩しくないデザイン</li>
-    <li>銘柄の名前を入力補完で簡単入力</li>
-  </ul>
+<div class="min-h-screen flex flex-col items-center justify-center px-6 py-12 text-center relative">
+  <!-- Hero Section -->
+  <div class="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl p-8 shadow-2xl max-w-4xl w-full mb-8">
+    <div class="mb-8">
+      <h1 class="text-4xl md:text-6xl font-bold text-transparent bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 bg-clip-text mb-4">
+        日本酒ログ管理アプリ
+      </h1>
+      <div class="text-xl md:text-2xl font-medium text-gray-200 leading-relaxed">
+        日本酒を<span class="text-yellow-400 font-bold">気軽に記録</span>できる<br class="md:hidden">
+        シンプルなログアプリ
+      </div>
+    </div>
 
-  <div class="space-x-4">
-    <%= link_to "新規登録", new_user_registration_path, class: "px-6 py-3 bg-yellow-600 text-white rounded-md hover:bg-yellow-700" %>
-    <%= link_to "ログイン", new_user_session_path, class: "px-6 py-3 border border-yellow-600 text-yellow-600 rounded-md hover:bg-yellow-700 hover:text-white" %>
+    <div class="text-lg text-gray-300 mb-8 leading-relaxed">
+      周りの評価や意見を気にせず、<span class="text-emerald-400 font-medium">自分だけの特別なメモ</span>として使える。<br>
+      <span class="text-purple-400 font-medium">誰でも続けやすく</span>日本酒の敷居を下げることを目指しています。
+    </div>
+
+    <!-- Features -->
+    <div class="grid md:grid-cols-2 gap-4 mb-8">
+      <div class="backdrop-blur-sm bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="text-2xl mb-3">📝</div>
+        <h3 class="text-yellow-400 font-bold mb-2">シンプル記録</h3>
+        <p class="text-gray-300 text-sm">銘柄、味、メモをスマホから素早く記録</p>
+      </div>
+      <div class="backdrop-blur-sm bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="text-2xl mb-3">🌙</div>
+        <h3 class="text-purple-400 font-bold mb-2">目に優しい</h3>
+        <p class="text-gray-300 text-sm">薄暗い店でも眩しくないデザイン</p>
+      </div>
+      <div class="backdrop-blur-sm bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="text-2xl mb-3">⚡</div>
+        <h3 class="text-emerald-400 font-bold mb-2">自動補完</h3>
+        <p class="text-gray-300 text-sm">銘柄名を入力補完で簡単入力</p>
+      </div>
+      <div class="backdrop-blur-sm bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="text-2xl mb-3">💬</div>
+        <h3 class="text-cyan-400 font-bold mb-2">コミュニティ</h3>
+        <p class="text-gray-300 text-sm">みんなと感想をシェア</p>
+      </div>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <%= link_to new_user_registration_path, class: "group px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-2xl font-bold text-lg shadow-xl hover:from-yellow-400 hover:to-orange-400 hover:scale-105 hover:shadow-yellow-500/25 transition-all duration-300" do %>
+        <span class="inline-flex items-center">
+          👤 新規登録
+          <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </span>
+      <% end %>
+      <%= link_to new_user_session_path, class: "group px-8 py-4 backdrop-blur-sm bg-white/10 border-2 border-white/30 text-white rounded-2xl font-bold text-lg hover:bg-white/20 hover:scale-105 transition-all duration-300" do %>
+        <span class="inline-flex items-center">
+          🔑 ログイン
+          <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </span>
+      <% end %>
+    </div>
   </div>
 
-  <div class="mt-12 max-w-3xl w-full">
-    <img src="/images/QR_TKL.png" alt="QRコード" class="mx-auto rounded-lg shadow-md" />
-    <p class="text-gray-400 mt-4">
-      👆スマホ用QRコード👆
+  <!-- QR Code Section -->
+  <div class="backdrop-blur-lg bg-white/5 border border-white/10 rounded-3xl p-8 shadow-xl max-w-sm w-full">
+    <div class="text-center">
+      <h3 class="text-xl font-bold text-gray-200 mb-4">📱 スマホでアクセス</h3>
+      <div class="bg-white p-4 rounded-2xl inline-block shadow-lg">
+        <img src="/images/QR_TKL.png" alt="QRコード" class="w-40 h-40 mx-auto" />
+      </div>
+      <p class="text-gray-400 mt-4 text-sm">
+        QRコードでスマホから簡単アクセス
+      </p>
+    </div>
   </div>
 </div>

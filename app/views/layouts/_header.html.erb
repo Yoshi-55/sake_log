@@ -1,50 +1,39 @@
-<header class="bg-gray-700 shadow p-4 fixed top-0 left-0 w-full z-50">
+<header class="backdrop-blur-md bg-white/10 border-b border-white/20 shadow-2xl p-4 fixed top-0 left-0 w-full z-50">
   <div class="container mx-auto flex items-center">
-    <h1 class="text-lg sm:text-xl lg:text-5xl font-bold flex-shrink-0 mr-1 sm:mr-2 lg:mr-3">
-      <%= link_to sake_logs_path, class: "text-yellow-500" do %>
-        🌙TOKK LOG<span class="text-pink-600">.</span>
+    <h1 class="text-lg sm:text-xl lg:text-4xl font-bold flex-shrink-0 mr-1 sm:mr-2 lg:mr-3">
+      <%= link_to sake_logs_path, class: "text-transparent bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 bg-clip-text hover:from-yellow-300 hover:via-orange-300 hover:to-pink-300 transition-all duration-300" do %>
+        🌙 TOKK LOG.
       <% end %>
     </h1>
 
     <!-- ナビゲーションボタン -->
-    <div class="flex-shrink-0 ml-auto mr-2 flex gap-1 sm:gap-2">
-      <%= link_to "記録一覧", sake_logs_path, class: "px-2 py-1 sm:px-6 sm:py-3 bg-gradient-to-r from-yellow-500 to-gray-400 text-white rounded-full shadow-lg font-bold text-xs sm:text-base tracking-wide border-2 border-yellow-300 hover:from-yellow-400 hover:to-gray-300 hover:scale-105 transition-all duration-150" %>
-      <%= link_to "掲示板", posts_path, class: "px-2 py-1 sm:px-6 sm:py-3 bg-gradient-to-r from-pink-500 to-yellow-400 text-white rounded-full shadow-lg font-bold text-xs sm:text-base tracking-wide border-2 border-pink-300 hover:from-pink-400 hover:to-yellow-300 hover:scale-105 transition-all duration-150" %>
+    <div class="flex-shrink-0 ml-auto mr-2 flex gap-1 sm:gap-3">
+      <%= link_to "📋 記録一覧", sake_logs_path, class: "px-3 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-emerald-500/80 to-teal-500/80 backdrop-blur-sm border border-white/20 text-white rounded-2xl shadow-lg font-medium text-xs sm:text-base tracking-wide hover:from-emerald-400/90 hover:to-teal-400/90 hover:scale-105 hover:shadow-emerald-500/25 transition-all duration-300" %>
+      <%= link_to "💬 掲示板", posts_path, class: "px-3 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-violet-500/80 to-purple-500/80 backdrop-blur-sm border border-white/20 text-white rounded-2xl shadow-lg font-medium text-xs sm:text-base tracking-wide hover:from-violet-400/90 hover:to-purple-400/90 hover:scale-105 hover:shadow-violet-500/25 transition-all duration-300" %>
     </div>
 
-    <!-- ハンバーガーメニュー（全画面表示） -->
-    <button id="hamburger-btn" class="p-2 focus:outline-none" aria-label="メニューを開く">
-      <span class="block w-6 h-0.5 bg-white mb-1"></span>
-      <span class="block w-6 h-0.5 bg-white mb-1"></span>
-      <span class="block w-6 h-0.5 bg-white"></span>
+    <!-- ハンバーガーメニュー -->
+    <button id="hamburger-btn" class="p-3 focus:outline-none group flex-shrink-0" aria-label="メニューを開く">
+      <div class="relative w-6 h-6">
+        <span class="absolute top-1 left-0 w-6 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:bg-yellow-400"></span>
+        <span class="absolute top-3 left-0 w-6 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:bg-yellow-400"></span>
+        <span class="absolute top-5 left-0 w-6 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:bg-yellow-400"></span>
+      </div>
     </button>
 
-    <nav id="main-nav" class="fixed top-16 right-0 w-48 bg-gray-700 z-50 flex-col items-center hidden rounded-b-xl shadow-lg">
-      <div class="flex flex-col items-center space-y-2 my-4">
-        <%= link_to "TOPに戻る", root_path, class: "text-yellow-400 hover:underline font-bold" %>
-        <%= link_to "🍶選び方ガイド🔰", guide_path, class: "text-blue-400 hover:underline font-bold" %>
-        <%= link_to "このアプリの使い方", howto_path, class: "text-green-500 hover:underline font-bold" %>
+    <nav id="main-nav" class="fixed top-20 right-4 w-56 backdrop-blur-lg bg-gray-800/95 border border-gray-600/50 z-[60] flex-col items-center hidden rounded-3xl shadow-2xl overflow-hidden">
+      <div class="flex flex-col items-center space-y-3 p-6 w-full">
+        <%= link_to "🏠 TOPに戻る", root_path, class: "w-full text-center py-3 px-4 text-yellow-300 hover:text-yellow-200 hover:bg-gray-700/70 rounded-xl font-medium transition-all duration-200" %>
+        <%= link_to "🍶 選び方ガイド", guide_path, class: "w-full text-center py-3 px-4 text-blue-300 hover:text-blue-200 hover:bg-gray-700/70 rounded-xl font-medium transition-all duration-200" %>
+        <%= link_to "❓ 使い方", howto_path, class: "w-full text-center py-3 px-4 text-green-300 hover:text-green-200 hover:bg-gray-700/70 rounded-xl font-medium transition-all duration-200" %>
+        <div class="w-full h-px bg-gray-600/50 my-2"></div>
         <% if user_signed_in? %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_method: :delete, confirm: "ログアウトしますか？" }, class: "text-red-500 hover:underline text-xs px-2 py-1" %>
+          <%= link_to "🚪 ログアウト", destroy_user_session_path, method: :delete, data: { turbo_method: :delete, confirm: "ログアウトしますか？" }, class: "w-full text-center py-3 px-4 text-red-300 hover:text-red-200 hover:bg-red-600/30 rounded-xl font-medium transition-all duration-200" %>
         <% else %>
-          <%= link_to "ログイン", new_user_session_path, class: "text-yellow-600 hover:underline" %>
-          <%= link_to "新規登録", new_user_registration_path, class: "text-yellow-600 hover:underline" %>
+          <%= link_to "🔑 ログイン", new_user_session_path, class: "w-full text-center py-3 px-4 text-cyan-300 hover:text-cyan-200 hover:bg-gray-700/70 rounded-xl font-medium transition-all duration-200" %>
+          <%= link_to "👤 新規登録", new_user_registration_path, class: "w-full text-center py-3 px-4 text-pink-300 hover:text-pink-200 hover:bg-gray-700/70 rounded-xl font-medium transition-all duration-200" %>
         <% end %>
       </div>
     </nav>
   </div>
-  <script>
-    function bindHamburger() {
-      var btn = document.getElementById('hamburger-btn');
-      var nav = document.getElementById('main-nav');
-      if (btn && nav && !btn.dataset.bound) {
-        btn.dataset.bound = true;
-        btn.addEventListener('click', function() {
-          nav.classList.toggle('hidden');
-        });
-      }
-    }
-    document.addEventListener('DOMContentLoaded', bindHamburger);
-    document.addEventListener('turbo:load', bindHamburger);
-  </script>
 </header>

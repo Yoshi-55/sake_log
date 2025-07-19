@@ -1,9 +1,7 @@
-require "net/http"
-
 class BrandsController < ApplicationController
   def proxy
-    uri = URI("https://muro.sakenowa.com/sakenowa-data/api/brands")
-    response = Net::HTTP.get(uri)
-    render json: JSON.parse(response)
+    brands_data = BrandService.fetch_brands
+    brands_response = { "brands" => brands_data.map { |name, _| { "name" => name } } }
+    render json: brands_response
   end
 end
