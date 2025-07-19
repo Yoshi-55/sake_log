@@ -22,18 +22,25 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body class="bg-gray-900 min-h-screen flex flex-col">
+  <body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen flex flex-col">
   <%= render "layouts/header" %>
 
-  <main class="pt-16 sm:pt-16 flex-1">
-  <% if user_signed_in? %>
-    <div class="text-xl text-gray-400 text-right pr-4 mb-4 mt-6">
-      🌙ようこそ、<%= current_user.name %> さん🍶
-    </div>
-  <% end %>
+  <main class="pt-20 sm:pt-20 flex-1 relative">
+    <!-- Background pattern -->
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+    
+    <% if user_signed_in? %>
+      <div class="relative z-10 backdrop-blur-sm bg-white/5 border border-white/10 rounded-2xl mx-4 mb-6 mt-6 p-4 shadow-xl">
+        <div class="text-xl text-transparent bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-right font-medium">
+          ✨ ようこそ、<%= current_user.name %> さん 🍶
+        </div>
+      </div>
+    <% end %>
 
-  <%= yield %>
-</main>
+    <div class="relative z-10">
+      <%= yield %>
+    </div>
+  </main>
 
   <%= render "layouts/footer" %>
 </body>

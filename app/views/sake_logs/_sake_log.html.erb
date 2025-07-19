@@ -1,19 +1,34 @@
-<div class="space-y-4 text-gray-50">
+<div class="space-y-4 text-white">
   <%# 銘柄 %>
-  <div class="flex-nowrap gap-x-2 text-gray-50">
-    <strong class="w-24 font-medium text-xl">銘柄:</strong>
-    <span class="font-medium text-xl"><%= sake_log.name %></span>
+  <div class="space-y-2">
+    <div class="flex items-center space-x-2">
+      <span class="text-yellow-400 text-lg">🍶</span>
+      <strong class="text-yellow-300 font-medium text-sm">銘柄</strong>
+    </div>
+    <div class="text-white font-bold text-lg leading-tight">
+      <%= sake_log.name %>
+    </div>
   </div>
 
   <%# 味 %>
-  <div class="flex-nowrap gap-x-2 text-gray-50">
-    <strong class="w-24 font-medium text-xl">味:</strong>
-    <span class="font-medium text-xl"><%= sake_log.taste %></span>
+  <div class="space-y-2">
+    <div class="flex items-center space-x-2">
+      <span class="text-purple-400 text-lg">👅</span>
+      <strong class="text-purple-300 font-medium text-sm">味</strong>
+    </div>
+    <div class="text-gray-200 font-medium">
+      <%= sake_log.taste %>
+    </div>
   </div>
 
   <%# メモ %>
-  <div class="flex-nowrap gap-x-2 text-gray-50">
-    <strong class="w-24 font-medium text-xl">メモ:</strong>
-    <span class="font-medium text-xl"><%= sake_log.memo %></span>
+  <div class="space-y-2">
+    <div class="flex items-center space-x-2">
+      <span class="text-emerald-400 text-lg">📝</span>
+      <strong class="text-emerald-300 font-medium text-sm">メモ</strong>
+    </div>
+    <div class="text-gray-300 text-sm leading-relaxed line-clamp-3">
+      <%= sake_log.memo %>
+    </div>
   </div>
 </div>

@@ -6,7 +6,7 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 
 import "./brand_autocomplete";
-
+import "./hamburger_menu";
 import "./like_animation";
 import "./like_ajax";
 

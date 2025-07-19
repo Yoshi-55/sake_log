@@ -4,11 +4,10 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.includes(:user, :sake_log)
-    if params[:q].present?
-      q = "%#{params[:q]}%"
-      @posts = @posts.where("brand LIKE ? OR taste LIKE ? OR memo LIKE ?", q, q, q)
-    end
-    @posts = @posts.order(created_at: :desc).page(params[:page]).per(30)
+                 .search(params[:q])
+                 .recent
+                 .page(params[:page])
+                 .per(30)
   end
 
   def show
@@ -16,15 +15,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    if params[:sake_log_id]
-      sake_log = SakeLog.find_by(id: params[:sake_log_id])
-      if sake_log
-        @post.brand = sake_log.name
-        @post.taste = sake_log.taste
-        @post.memo  = sake_log.memo
-        @post.sake_log = sake_log
-      end
-    end
+    populate_post_from_sake_log if params[:sake_log_id].present?
   end
 
   def create
@@ -43,11 +34,22 @@ class PostsController < ApplicationController
   end
 
   private
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    def post_params
-      params.require(:post).permit(:brand, :taste, :memo, :sake_log_id)
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:brand, :taste, :memo, :sake_log_id)
+  end
+
+  def populate_post_from_sake_log
+    sake_log = SakeLog.find_by(id: params[:sake_log_id])
+    return unless sake_log
+    
+    @post.brand = sake_log.name
+    @post.taste = sake_log.taste
+    @post.memo = sake_log.memo
+    @post.sake_log = sake_log
+  end
 end
