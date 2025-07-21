@@ -10,6 +10,20 @@
     </div>
   </div>
 
+  <%# レーダーチャート %>
+  <div class="space-y-3">
+    <div class="flex items-center space-x-2">
+      <span class="text-green-400 text-lg">📊</span>
+      <strong class="text-green-300 font-medium text-sm">味覚評価</strong>
+    </div>
+    <div class="relative h-48 w-full bg-slate-800/30 rounded-lg border border-slate-700/50 p-4">
+      <canvas id="radar-<%= sake_log.id %>" 
+              class="radar-chart w-full h-full" 
+              data-chart-data="<%= sake_log.radar_values.to_json %>">
+      </canvas>
+    </div>
+  </div>
+
   <%# 味 %>
   <div class="space-y-2">
     <div class="flex items-center space-x-2">

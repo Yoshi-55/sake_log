@@ -39,6 +39,94 @@
     placeholder: "例: 名前に惹かれて呑んでみた" %>
   </div>
 
+  <!-- 味覚評価セクション -->
+  <div class="my-8 backdrop-blur-sm bg-white/10 border border-white/20 rounded-2xl p-6">
+    <h3 class="text-lg font-bold text-cyan-300 mb-4 flex items-center">
+      <span class="text-cyan-400 text-xl mr-2">📊</span>
+      味覚評価 (5段階) - 基本5味
+    </h3>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <%= form.label :sweetness, "🍯 甘味", class: "block font-medium mb-2 text-gray-200" %>
+        <%= form.range_field :sweetness, 
+            min: 1, max: 5, step: 1, value: sake_log.sweetness || 3,
+            class: "w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-yellow",
+            oninput: "updateRangeValue(this, 'sweetness-value')" %>
+        <div class="flex justify-between text-xs text-gray-400 mt-1">
+          <span>弱い</span>
+          <span id="sweetness-value" class="font-bold text-yellow-300"><%= sake_log.sweetness || 3 %></span>
+          <span>強い</span>
+        </div>
+      </div>
+
+      <div>
+        <%= form.label :sourness, "� 酸味", class: "block font-medium mb-2 text-gray-200" %>
+        <%= form.range_field :sourness, 
+            min: 1, max: 5, step: 1, value: sake_log.sourness || 3,
+            class: "w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-green",
+            oninput: "updateRangeValue(this, 'sourness-value')" %>
+        <div class="flex justify-between text-xs text-gray-400 mt-1">
+          <span>弱い</span>
+          <span id="sourness-value" class="font-bold text-green-300"><%= sake_log.sourness || 3 %></span>
+          <span>強い</span>
+        </div>
+      </div>
+
+      <div>
+        <%= form.label :spiciness, "🌶️ 辛味", class: "block font-medium mb-2 text-gray-200" %>
+        <%= form.range_field :spiciness, 
+            min: 1, max: 5, step: 1, value: sake_log.spiciness || 3,
+            class: "w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-red",
+            oninput: "updateRangeValue(this, 'spiciness-value')" %>
+        <div class="flex justify-between text-xs text-gray-400 mt-1">
+          <span>弱い</span>
+          <span id="spiciness-value" class="font-bold text-red-300"><%= sake_log.spiciness || 3 %></span>
+          <span>強い</span>
+        </div>
+      </div>
+
+      <div>
+        <%= form.label :bitterness, "☕ 苦味", class: "block font-medium mb-2 text-gray-200" %>
+        <%= form.range_field :bitterness, 
+            min: 1, max: 5, step: 1, value: sake_log.bitterness || 3,
+            class: "w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-orange",
+            oninput: "updateRangeValue(this, 'bitterness-value')" %>
+        <div class="flex justify-between text-xs text-gray-400 mt-1">
+          <span>弱い</span>
+          <span id="bitterness-value" class="font-bold text-orange-300"><%= sake_log.bitterness || 3 %></span>
+          <span>強い</span>
+        </div>
+      </div>
+
+      <div class="sm:col-span-2">
+        <%= form.label :umami, "🍄 旨味", class: "block font-medium mb-2 text-gray-200" %>
+        <%= form.range_field :umami, 
+            min: 1, max: 5, step: 1, value: sake_log.umami || 3,
+            class: "w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-purple",
+            oninput: "updateRangeValue(this, 'umami-value')" %>
+        <div class="flex justify-between text-xs text-gray-400 mt-1">
+          <span>弱い</span>
+          <span id="umami-value" class="font-bold text-purple-300"><%= sake_log.umami || 3 %></span>
+          <span>強い</span>
+        </div>
+      </div>
+    </div>
+
+    <%# リアルタイム味覚チャートプレビュー %>
+    <div class="mt-6 p-4 bg-slate-800/30 rounded-lg border border-slate-700/50">
+      <h3 class="text-lg font-semibold text-green-300 mb-4 flex items-center">
+        <span class="text-green-400 mr-2">📊</span>
+        味覚プロファイル プレビュー
+      </h3>
+      <div class="relative h-48 w-full">
+        <canvas id="preview-radar-chart" 
+                class="radar-chart w-full h-full">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
   <div class="text-center">
     <%= form.submit "保存", class: "rounded-md px-6 py-3 bg-yellow-600 hover:bg-yellow-500 text-white font-semibold cursor-pointer w-full sm:w-auto" %>
   </div>
