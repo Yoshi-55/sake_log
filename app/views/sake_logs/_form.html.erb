@@ -24,31 +24,15 @@
     </ul>
   </div>
 
-  <div class="my-5">
-    <%= form.label :"味(20文字以内)", class: "block font-semibold mb-1 text-gray-50" %>
-    <%= form.text_field :taste,
-    class: ["bg-gray-400 block shadow-sm rounded-md border outline-none px-3 py-3 w-full text-base placeholder:text-black", {"border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600": sake_log.errors[:taste].none?, "border-red-400 focus:border-red-600 focus:ring-1 focus:ring-red-600": sake_log.errors[:taste].any?}],
-    maxlength: 20,
-    placeholder: "例: 辛口、甘口、薫酒、爽酒、醇酒、熟酒、好き、嫌い" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :"メモ(80文字以内)", class: "block font-semibold mb-1 text-gray-50" %>
-    <%= form.textarea :memo, rows: 4, class: ["bg-gray-500 block shadow-sm rounded-md border outline-none px-3 py-3 w-full text-base placeholder:text-black", {"border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600": sake_log.errors[:memo].none?, "border-red-400 focus:border-red-600 focus:ring-1 focus:ring-red-600": sake_log.errors[:memo].any?}],
-    maxlength: 80,
-    placeholder: "例: 名前に惹かれて呑んでみた" %>
-  </div>
-
-  <!-- 味覚評価セクション -->
   <div class="my-8 backdrop-blur-sm bg-white/10 border border-white/20 rounded-2xl p-6">
     <h3 class="text-lg font-bold text-cyan-300 mb-4 flex items-center">
       <span class="text-cyan-400 text-xl mr-2">📊</span>
       味覚評価 (5段階) - 基本5味
     </h3>
-    
+
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div>
-        <%= form.label :sweetness, "🍯 甘味", class: "block font-medium mb-2 text-gray-200" %>
+        <%= form.label :sweetness, "甘味", class: "block font-medium mb-2 text-gray-200" %>
         <%= form.range_field :sweetness, 
             min: 1, max: 5, step: 1, value: sake_log.sweetness || 3,
             class: "w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-yellow",
@@ -61,7 +45,7 @@
       </div>
 
       <div>
-        <%= form.label :sourness, "� 酸味", class: "block font-medium mb-2 text-gray-200" %>
+        <%= form.label :sourness, "酸味", class: "block font-medium mb-2 text-gray-200" %>
         <%= form.range_field :sourness, 
             min: 1, max: 5, step: 1, value: sake_log.sourness || 3,
             class: "w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-green",
@@ -74,7 +58,7 @@
       </div>
 
       <div>
-        <%= form.label :spiciness, "🌶️ 辛味", class: "block font-medium mb-2 text-gray-200" %>
+        <%= form.label :spiciness, "辛味", class: "block font-medium mb-2 text-gray-200" %>
         <%= form.range_field :spiciness, 
             min: 1, max: 5, step: 1, value: sake_log.spiciness || 3,
             class: "w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-red",
@@ -87,7 +71,7 @@
       </div>
 
       <div>
-        <%= form.label :bitterness, "☕ 苦味", class: "block font-medium mb-2 text-gray-200" %>
+        <%= form.label :bitterness, "苦味", class: "block font-medium mb-2 text-gray-200" %>
         <%= form.range_field :bitterness, 
             min: 1, max: 5, step: 1, value: sake_log.bitterness || 3,
             class: "w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-orange",
@@ -100,7 +84,7 @@
       </div>
 
       <div class="sm:col-span-2">
-        <%= form.label :umami, "🍄 旨味", class: "block font-medium mb-2 text-gray-200" %>
+        <%= form.label :umami, "旨味", class: "block font-medium mb-2 text-gray-200" %>
         <%= form.range_field :umami, 
             min: 1, max: 5, step: 1, value: sake_log.umami || 3,
             class: "w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-purple",
@@ -113,21 +97,17 @@
       </div>
     </div>
 
-    <%# リアルタイム味覚チャートプレビュー %>
-    <div class="mt-6 p-4 bg-slate-800/30 rounded-lg border border-slate-700/50">
-      <h3 class="text-lg font-semibold text-green-300 mb-4 flex items-center">
-        <span class="text-green-400 mr-2">📊</span>
-        味覚プロファイル プレビュー
-      </h3>
-      <div class="relative h-48 w-full">
-        <canvas id="preview-radar-chart" 
-                class="radar-chart w-full h-full">
-        </canvas>
-      </div>
-    </div>
+    <div class="my-5">
+    <%= form.label :"メモ(80文字以内)", class: "block font-semibold mb-1 text-gray-50" %>
+    <%= form.textarea :memo, rows: 4, class: ["bg-gray-500 block shadow-sm rounded-md border outline-none px-3 py-3 w-full text-base placeholder:text-black", {"border-gray-300 focus:border-blue-600 focus:ring-1 focus:ring-blue-600": sake_log.errors[:memo].none?, "border-red-400 focus:border-red-600 focus:ring-1 focus:ring-red-600": sake_log.errors[:memo].any?}],
+    maxlength: 80,
+    placeholder: "例: 名前に惹かれて呑んでみた" %>
+  </div>
   </div>
 
   <div class="text-center">
     <%= form.submit "保存", class: "rounded-md px-6 py-3 bg-yellow-600 hover:bg-yellow-500 text-white font-semibold cursor-pointer w-full sm:w-auto" %>
   </div>
+
+
 <% end %>
