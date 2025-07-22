@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_06_200000) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_19_071232) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -43,6 +43,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_06_200000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.integer "sweetness", default: 3, null: false, comment: "甘味 (1-5)"
+    t.integer "sourness", default: 3, null: false, comment: "酸味 (1-5)"
+    t.integer "bitterness", default: 3, null: false, comment: "苦味 (1-5)"
+    t.integer "umami", default: 3, null: false, comment: "旨味 (1-5)"
+    t.integer "spiciness", default: 3, null: false, comment: "辛味 (1-5)"
     t.index ["user_id"], name: "index_sake_logs_on_user_id"
   end
 

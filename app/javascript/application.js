@@ -7,6 +7,8 @@ import "./controllers"
 
 import "./brand_autocomplete";
 import "./hamburger_menu";
+import "./radar_chart";
+import "./range_slider";
 import "./like_animation";
 import "./like_ajax";
 
