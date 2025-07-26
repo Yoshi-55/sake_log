@@ -3,7 +3,20 @@ class SakeLogsController < ApplicationController
   before_action :load_brands, only: %i[new edit]
 
   def index
-    @sake_logs = current_user.sake_logs.recent
+    @sake_logs = current_user.sake_logs
+
+    # キーワード検索
+    if params[:q].present?
+      @sake_logs = @sake_logs.where("name ILIKE ? OR memo ILIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
+
+    # 味覚による並び替え
+    if params[:taste_sort].present?
+      direction = params[:taste_direction].presence || "desc"  # デフォルトを高い順に
+      @sake_logs = sort_by_taste(@sake_logs, params[:taste_sort], direction)
+    else
+      @sake_logs = @sake_logs.recent
+    end
   end
 
   def show
@@ -58,11 +71,31 @@ class SakeLogsController < ApplicationController
   end
 
   def sake_log_params
-    params.require(:sake_log).permit(:name, :taste, :memo, :sweetness, :sourness, :spiciness, :bitterness, :umami)
+    params.require(:sake_log).permit(:name, :memo, :sweetness, :sourness, :spiciness, :bitterness, :umami)
   end
 
   def load_brands
     @brands = BrandService.fetch_brands
     flash.now[:alert] = "銘柄一覧の取得に失敗しました" if @brands.empty?
+  end
+
+  def sort_by_taste(sake_logs, taste_type, direction)
+    case taste_type
+    when "sweetness"
+      column = "sweetness"
+    when "sourness"
+      column = "sourness"
+    when "bitterness"
+      column = "bitterness"
+    when "umami"
+      column = "umami"
+    when "spiciness"
+      column = "spiciness"
+    else
+      return sake_logs.recent
+    end
+
+    order_direction = direction == "desc" ? "DESC" : "ASC"
+    sake_logs.order("#{column} #{order_direction}, created_at DESC")
   end
 end

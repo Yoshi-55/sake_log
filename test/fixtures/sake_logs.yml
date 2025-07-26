@@ -2,10 +2,18 @@
 
 one:
   name: MyString
-  taste: MyString
   memo: MyText
+  sweetness: 3
+  sourness: 3
+  bitterness: 3
+  umami: 3
+  spiciness: 3
 
 two:
   name: MyString
-  taste: MyString
   memo: MyText
+  sweetness: 4
+  sourness: 2
+  bitterness: 3
+  umami: 4
+  spiciness: 2

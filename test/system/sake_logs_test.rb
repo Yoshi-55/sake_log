@@ -16,7 +16,7 @@ class SakeLogsTest < ApplicationSystemTestCase
 
     fill_in "Memo", with: @sake_log.memo
     fill_in "Name", with: @sake_log.name
-    fill_in "Taste", with: @sake_log.taste
+    # Taste field has been replaced with 5 separate taste parameters
     click_on "Create Sake log"
 
     assert_text "Sake log was successfully created"
@@ -29,7 +29,7 @@ class SakeLogsTest < ApplicationSystemTestCase
 
     fill_in "Memo", with: @sake_log.memo
     fill_in "Name", with: @sake_log.name
-    fill_in "Taste", with: @sake_log.taste
+    # Taste field has been replaced with 5 separate taste parameters
     click_on "Update Sake log"
 
     assert_text "Sake log was successfully updated"

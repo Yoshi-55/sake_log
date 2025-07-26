@@ -24,8 +24,12 @@ ja:
         password_confirmation: "パスワード確認"
       sake_log:
         name: "銘柄"
-        taste: "味"
         memo: "メモ"
+        sweetness: "甘味"
+        sourness: "酸味"
+        bitterness: "苦味"
+        umami: "旨味"
+        spiciness: "辛味"
   time:
     formats:
       short: "%m/%d %H:%M"

@@ -1,27 +1,111 @@
-<h1 class="text-3xl font-extrabold mb-8 text-pink-600 tracking-wide text-center" style="font-family:sans-serif; letter-spacing:0.1em;">新規投稿</h1>
-<div class="max-w-lg mx-auto bg-white border border-pink-200 rounded-2xl shadow-lg p-8">
-  <%= form_with(model: @post, local: true) do |form| %>
-    <% if @post.sake_log.present? %>
-      <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded text-blue-700 text-sm">
-        日本酒記録から「銘柄・味・メモ」を自動入力しました。
+<% content_for :title, "新規投稿" %>
+
+<div class="w-full px-4 sm:px-6 max-w-4xl mx-auto">
+  <% if notice.present? %>
+    <div class="backdrop-blur-sm bg-emerald-500/20 border border-emerald-400/30 rounded-2xl p-4 mb-6 shadow-xl" id="notice">
+      <div class="flex items-center space-x-2">
+        <span class="text-emerald-400 text-xl">✅</span>
+        <p class="text-emerald-100 font-medium"><%= notice %></p>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- ヘッダー -->
+  <div class="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl p-6 mb-8 shadow-2xl">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <h1 class="text-3xl sm:text-4xl font-bold text-transparent bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text">
+        💬 新規投稿
+      </h1>
+      <%= link_to posts_path, class: "group px-4 py-2 backdrop-blur-sm bg-white/10 border border-white/20 text-gray-200 rounded-xl font-medium text-sm hover:bg-white/20 hover:text-white transition-all duration-200" do %>
+        <span class="inline-flex items-center">
+          <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          一覧に戻る
+        </span>
+      <% end %>
+    </div>
+  </div>
+
+  <%= form_with(model: @post, local: true, class: "space-y-8") do |form| %>
+    <% if @post.errors.any? %>
+      <div class="backdrop-blur-sm bg-red-500/20 border border-red-400/30 rounded-2xl p-6 shadow-xl">
+        <div class="flex items-center space-x-2 mb-4">
+          <span class="text-red-400 text-xl">⚠️</span>
+          <h2 class="text-red-300 font-bold text-lg">投稿に失敗しました</h2>
+        </div>
+        <ul class="list-disc ml-6 space-y-1">
+          <% @post.errors.each do |error| %>
+            <li class="text-red-200"><%= error.full_message %></li>
+          <% end %>
+        </ul>
       </div>
     <% end %>
-    <div class="mb-6">
-      <%= form.label :brand, "銘柄", class: "block font-bold mb-2 text-pink-600 text-lg" %>
-      <%= form.text_field :brand, value: @post.brand, class: "w-full p-4 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-400 text-gray-800 text-base", placeholder: "例：獺祭" %>
-    </div>
-    <div class="mb-6">
-      <%= form.label :taste, "味", class: "block font-bold mb-2 text-pink-600 text-lg" %>
-      <%= form.text_field :taste, value: @post.taste, class: "w-full p-4 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-400 text-gray-800 text-base", placeholder: "例：フルーティー" %>
-    </div>
-    <div class="mb-6">
-      <%= form.label :memo, "メモ", class: "block font-bold mb-2 text-pink-600 text-lg" %>
-      <%= form.text_area :memo, value: @post.memo, rows: 2, class: "w-full p-4 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-400 text-gray-800 text-base", placeholder: "例：冷やして飲むと美味しい" %>
-    </div>
-    <%= form.hidden_field :sake_log_id %>
-    <div class="flex gap-4 justify-center">
-      <%= form.submit "投稿する", class: "px-6 py-2 bg-gradient-to-r from-pink-500 to-yellow-400 text-white rounded-full shadow hover:from-pink-400 hover:to-yellow-300 font-bold tracking-widest" %>
-      <%= link_to '戻る', posts_path, class: 'px-6 py-2 bg-gray-100 text-pink-600 rounded-full border border-pink-200 font-bold hover:bg-pink-50' %>
+
+    <!-- フォームフィールド（味覚チャート、銘柄、メモを統合） -->
+    <div class="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl p-8 shadow-xl">
+      <div class="space-y-6">
+        <!-- 銘柄を最上部に配置 -->
+        <div class="space-y-3">
+          <%= form.label :brand, "銘柄", class: "flex items-center space-x-2 font-medium text-lg text-yellow-300" %>
+          <%= form.text_field :brand, value: @post.brand, 
+              class: "w-full rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm text-white px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300", 
+              placeholder: "例：獺祭" %>
+        </div>
+
+        <!-- taste情報がある場合はチャートを表示 -->
+        <% if @post.sake_log.present? && @post.has_radar_data? %>
+        <div class="space-y-4">
+          <div class="flex items-center space-x-2 mb-4">
+            <span class="text-blue-400 text-lg">ℹ️</span>
+            <strong class="text-blue-300 font-medium text-lg">日本酒記録からの自動入力</strong>
+          </div>
+          <div class="text-gray-300 text-sm mb-4">
+            <strong>味覚情報:</strong> <%= @post.taste_description %>
+          </div>
+          
+          <!-- レーダーチャート -->
+          <div class="backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-white/10 mb-6">
+            <div class="flex items-center space-x-2 mb-4">
+              <span class="text-green-400 text-lg">📊</span>
+              <h3 class="text-green-300 font-bold text-lg">味覚評価</h3>
+            </div>
+            <div class="relative h-64 bg-white/5 rounded-xl border border-white/10 p-4">
+              <canvas id="new-post-radar-chart" 
+                      class="radar-chart w-full h-full" 
+                      data-chart-data="<%= @post.radar_values.to_json %>">
+              </canvas>
+            </div>
+          </div>
+        </div>
+        <% elsif @post.sake_log.present? %>
+        <div class="space-y-4">
+          <div class="flex items-center space-x-2 mb-4">
+            <span class="text-blue-400 text-lg">ℹ️</span>
+            <strong class="text-blue-300 font-medium text-lg">日本酒記録からの自動入力</strong>
+          </div>
+          <div class="text-gray-300 text-sm mb-6">
+            <strong>味覚情報:</strong> <%= @post.taste_description %>
+          </div>
+        </div>
+        <% end %>
+
+        <!-- メモ -->
+        <div class="space-y-3">
+          <%= form.label :memo, "メモ", class: "flex items-center space-x-2 font-medium text-lg text-emerald-300" %>
+          <%= form.text_area :memo, value: @post.memo, rows: 4, 
+              class: "w-full rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm text-white px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300 resize-none", 
+              placeholder: "例：冷やして飲むと美味しい。フルーティーな香りが特徴的。" %>
+        </div>
+
+        <%= form.hidden_field :sake_log_id %>
+
+        <!-- アクションボタン -->
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <%= form.submit "投稿する", class: "flex-1 py-4 px-6 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-2xl font-medium text-center hover:from-emerald-400 hover:to-teal-400 hover:scale-105 shadow-lg hover:shadow-emerald-500/25 transition-all duration-300" %>
+          <%= link_to '戻る', posts_path, class: 'flex-1 py-4 px-6 backdrop-blur-sm bg-white/10 border border-white/20 text-gray-200 rounded-2xl font-medium text-center hover:bg-white/20 hover:text-white transition-all duration-200' %>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
