@@ -18,7 +18,7 @@ class SakeLogsController < ApplicationController
       @sake_logs = @sake_logs.recent
     end
   end
-  
+
   def new
     @sake_log = SakeLog.new
   end
