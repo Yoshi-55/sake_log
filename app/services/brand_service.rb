@@ -11,7 +11,7 @@ class BrandService
 
     if response.is_a?(Net::HTTPSuccess)
       data = JSON.parse(response.body)
-      data["brands"].map { |b| [b["name"], b["name"]] }
+      data["brands"].map { |b| [ b["name"], b["name"] ] }
     else
       []
     end
