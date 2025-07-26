@@ -17,7 +17,7 @@ class SakeLogsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create sake_log" do
     assert_difference("SakeLog.count") do
-      post sake_logs_url, params: { sake_log: { memo: @sake_log.memo, name: @sake_log.name, taste: @sake_log.taste } }
+      post sake_logs_url, params: { sake_log: { memo: @sake_log.memo, name: @sake_log.name, sweetness: @sake_log.sweetness, sourness: @sake_log.sourness, bitterness: @sake_log.bitterness, umami: @sake_log.umami, spiciness: @sake_log.spiciness } }
     end
 
     assert_redirected_to sake_log_url(SakeLog.last)
@@ -34,7 +34,7 @@ class SakeLogsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update sake_log" do
-    patch sake_log_url(@sake_log), params: { sake_log: { memo: @sake_log.memo, name: @sake_log.name, taste: @sake_log.taste } }
+    patch sake_log_url(@sake_log), params: { sake_log: { memo: @sake_log.memo, name: @sake_log.name, sweetness: @sake_log.sweetness, sourness: @sake_log.sourness, bitterness: @sake_log.bitterness, umami: @sake_log.umami, spiciness: @sake_log.spiciness } }
     assert_redirected_to sake_log_url(@sake_log)
   end
 

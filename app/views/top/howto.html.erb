@@ -1,13 +1,174 @@
-<div class="max-w-2xl mx-auto p-6 bg-white rounded-2xl shadow mt-10">
-  <h2 class="text-2xl font-bold text-green-600 mb-4">このアプリの使い方</h2>
-  <ol class="list-decimal pl-6 mb-4 text-gray-700 space-y-2">
-    <li>まずはユーザー登録・ログインをしてください。</li>
-    <li>「記録一覧」から「新規作成」ボタンで日本酒の記録をログとして保存できます。</li>
-    <li>新規作成フォームで「銘柄・味・メモ」を入力し、保存ボタンを押します。</li>
-    <li>「掲示板にシェア」ボタンで日本酒の記録を掲示板に投稿できます。</li>
-    <li>掲示板では他のユーザーの投稿も閲覧・検索できます。</li>
-    <li>気になる投稿には「♥いいね」ボタンでリアクションできます。</li>
-    <li>投稿詳細ページからX（旧Twitter）でシェアも可能です。</li>
-    <li>「選び方ガイド」も参考にして、いろいろな日本酒を楽しみましょう！</li>
-  </ol>
+<div class="w-full px-4 sm:px-6 max-w-6xl mx-auto">
+  <!-- ヘッダーセクション -->
+  <div class="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl p-8 mb-8 shadow-2xl text-center">
+    <h1 class="text-4xl sm:text-5xl font-bold text-transparent bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text mb-4">
+      使い方ガイド
+    </h1>
+    <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+      TOKK LOG.で日本酒の記録と共有を始めましょう
+    </p>
+  </div>
+
+  <!-- ステップガイド -->
+  <div class="space-y-8">
+    <!-- Step 1 -->
+    <div class="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl">
+      <div class="flex flex-col lg:flex-row items-start gap-6">
+        <div class="flex-shrink-0">
+          <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+            1
+          </div>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-2xl font-bold text-green-400 mb-3">アカウント作成・ログイン</h3>
+          <p class="text-gray-300 text-lg mb-4">
+            まずはユーザー登録またはログインを行います。あなた専用の日本酒記録スペースを作成しましょう。
+          </p>
+          <div class="inline-flex items-center px-4 py-2 bg-green-500/20 border border-green-400/30 rounded-xl text-green-300 text-sm">
+            <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+            ヘッダーの「ログイン」「新規登録」から始められます
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl">
+      <div class="flex flex-col lg:flex-row items-start gap-6">
+        <div class="flex-shrink-0">
+          <div class="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+            2
+          </div>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-2xl font-bold text-yellow-400 mb-3">日本酒の記録を作成</h3>
+          <p class="text-gray-300 text-lg mb-4">
+            「記録一覧」から「新規作成」ボタンをクリック。銘柄名、5段階の味覚評価、メモを入力して保存します。
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+            <div class="bg-yellow-500/10 border border-yellow-400/20 rounded-lg p-3 text-center">
+              <div class="text-yellow-400 font-semibold text-sm">銘柄名</div>
+              <div class="text-gray-300 text-xs mt-1">日本酒の名前</div>
+            </div>
+            <div class="bg-yellow-500/10 border border-yellow-400/20 rounded-lg p-3 text-center">
+              <div class="text-yellow-400 font-semibold text-sm">味覚評価</div>
+              <div class="text-gray-300 text-xs mt-1">甘味・酸味・苦味・旨味・辛味</div>
+            </div>
+            <div class="bg-yellow-500/10 border border-yellow-400/20 rounded-lg p-3 text-center">
+              <div class="text-yellow-400 font-semibold text-sm">メモ</div>
+              <div class="text-gray-300 text-xs mt-1">感想や詳細情報</div>
+            </div>
+          </div>
+          <div class="inline-flex items-center px-4 py-2 bg-yellow-500/20 border border-yellow-400/30 rounded-xl text-yellow-300 text-sm">
+            <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
+            味覚評価はレーダーチャートで視覚化されます
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl">
+      <div class="flex flex-col lg:flex-row items-start gap-6">
+        <div class="flex-shrink-0">
+          <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+            3
+          </div>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-2xl font-bold text-pink-400 mb-3">掲示板でシェア</h3>
+          <p class="text-gray-300 text-lg mb-4">
+            記録した日本酒を「シェア」ボタンで掲示板に投稿。他のユーザーとお気に入りの銘柄を共有しましょう。
+          </p>
+          <div class="flex flex-wrap gap-3 mb-4">
+            <div class="bg-pink-500/10 border border-pink-400/20 rounded-lg px-3 py-2">
+              <span class="text-pink-400 text-sm font-medium">キーワード検索</span>
+            </div>
+            <div class="bg-pink-500/10 border border-pink-400/20 rounded-lg px-3 py-2">
+              <span class="text-pink-400 text-sm font-medium">味覚で並び替え</span>
+            </div>
+            <div class="bg-pink-500/10 border border-pink-400/20 rounded-lg px-3 py-2">
+              <span class="text-pink-400 text-sm font-medium">いいね機能</span>
+            </div>
+          </div>
+          <div class="inline-flex items-center px-4 py-2 bg-pink-500/20 border border-pink-400/30 rounded-xl text-pink-300 text-sm">
+            <span class="w-2 h-2 bg-pink-400 rounded-full mr-2"></span>
+            他のユーザーの投稿も検索・閲覧できます
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl">
+      <div class="flex flex-col lg:flex-row items-start gap-6">
+        <div class="flex-shrink-0">
+          <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+            4
+          </div>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-2xl font-bold text-purple-400 mb-3">コミュニティ機能を活用</h3>
+          <p class="text-gray-300 text-lg mb-4">
+            気になる投稿にはハートボタンでいいねを送ったり、詳細ページからSNSシェアも可能です。
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+            <div class="bg-purple-500/10 border border-purple-400/20 rounded-lg p-4">
+              <div class="text-purple-400 font-semibold text-sm mb-2">いいね機能</div>
+              <div class="text-gray-300 text-xs">気に入った投稿にリアクション</div>
+            </div>
+            <div class="bg-purple-500/10 border border-purple-400/20 rounded-lg p-4">
+              <div class="text-purple-400 font-semibold text-sm mb-2">SNSシェア</div>
+              <div class="text-gray-300 text-xs">X（旧Twitter）で記録を共有</div>
+            </div>
+          </div>
+          <div class="inline-flex items-center px-4 py-2 bg-purple-500/20 border border-purple-400/30 rounded-xl text-purple-300 text-sm">
+            <span class="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+            日本酒愛好家とのつながりを楽しもう
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 追加情報セクション -->
+  <div class="mt-12 backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl p-8 shadow-xl">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-transparent bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text mb-4">
+        より楽しむためのヒント
+      </h2>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-blue-500/10 border border-blue-400/20 rounded-2xl p-6 text-center">
+        <div class="w-12 h-12 bg-blue-400 rounded-xl mx-auto mb-4 flex items-center justify-center">
+          <span class="text-white text-xl font-bold">■</span>
+        </div>
+        <h3 class="text-blue-400 font-bold text-lg mb-2">味覚評価のコツ</h3>
+        <p class="text-gray-300 text-sm">
+          最初は直感で評価して、慣れてきたら細かく分析してみましょう
+        </p>
+      </div>
+
+      <div class="bg-emerald-500/10 border border-emerald-400/20 rounded-2xl p-6 text-center">
+        <div class="w-12 h-12 bg-emerald-400 rounded-xl mx-auto mb-4 flex items-center justify-center">
+          <span class="text-white text-xl font-bold">▲</span>
+        </div>
+        <h3 class="text-emerald-400 font-bold text-lg mb-2">メモを充実させよう</h3>
+        <p class="text-gray-300 text-sm">
+          飲んだ場所、一緒に食べた料理なども記録すると思い出が豊かに
+        </p>
+      </div>
+
+      <div class="bg-amber-500/10 border border-amber-400/20 rounded-2xl p-6 text-center">
+        <div class="w-12 h-12 bg-amber-400 rounded-xl mx-auto mb-4 flex items-center justify-center">
+          <span class="text-white text-xl font-bold">●</span>
+        </div>
+        <h3 class="text-amber-400 font-bold text-lg mb-2">選び方ガイド活用</h3>
+        <p class="text-gray-300 text-sm">
+          新しい日本酒選びに迷ったら、選び方ガイドをチェック！
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

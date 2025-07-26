@@ -1,28 +1,83 @@
+
+
 <% content_for :title, "詳細" %>
 
-<div class="w-full md:w-2/3 mx-auto px-4 sm:px-6">
-  <% if notice.present? %>
-    <p id="notice" class="py-2 px-3 bg-green-50 mb-5 text-green-600 font-semibold rounded-md inline-block text-center sm:text-left">
-      <%= notice %>
-    </p>
-  <% end %>
+<div class="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-8 mb-8 w-full max-w-4xl mx-auto">
+  <!-- ヘッダー -->
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+    <div class="flex items-center gap-4">
+      <div class="w-16 h-16 rounded-full bg-gradient-to-r from-pink-400 to-yellow-300 flex items-center justify-center text-2xl text-white font-bold">
+        <%= @sake_log.user&.name&.first&.upcase || "?" %>
+      </div>
+      <div>
+        <h1 class="text-3xl font-bold text-transparent bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text">
+          <%= @sake_log.name %>
+        </h1>
+        <div class="flex items-center gap-3 text-sm text-gray-300">
+          <span><%= @sake_log.user&.name %></span>
+          <span>•</span>
+          <span><%= @sake_log.created_at.strftime('%m/%d') %></span>
+        </div>
+      </div>
+    </div>
+    <%= link_to sake_logs_path, class: "group px-4 py-2 backdrop-blur-sm bg-white/10 border border-white/20 text-gray-200 rounded-xl font-medium text-sm hover:bg-white/20 hover:text-white transition-all duration-200" do %>
+      <span class="inline-flex items-center">
+        <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        一覧に戻る
+      </span>
+    <% end %>
+  </div>
 
-  <h1 class="font-bold text-2xl sm:text-4xl mb-6 text-center sm:text-left text-yellow-500">詳細</h1>
+  <!-- 投稿内容 -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- 味覚評価 -->
+    <div class="backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-white/10">
+      <div class="flex items-center space-x-2 mb-6">
+        <span class="text-green-400 text-lg">📊</span>
+        <h3 class="text-green-300 font-bold text-lg">味覚評価</h3>
+      </div>
+      <div class="relative h-80 bg-white/5 rounded-xl border border-white/10 p-4">
+        <canvas id="sake-radar-chart-<%= @sake_log.id %>" class="radar-chart w-full h-full" data-chart-data="<%= @sake_log.radar_values.to_json %>"></canvas>
+      </div>
+      <div class="mt-4 grid grid-cols-5 gap-2 text-xs text-center">
+        <% %w(甘味 酸味 辛味 苦味 旨味).each_with_index do |taste, i| %>
+          <div class="backdrop-blur-sm bg-white/5 rounded-lg p-2 border border-white/10">
+            <div class="font-medium text-gray-300"><%= taste %></div>
+            <div class="text-white font-bold"><%= @sake_log.radar_values[i] %></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-  <%= render @sake_log %>
+    <!-- メモ -->
+    <div class="space-y-6">
+      <div class="backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-white/10">
+        <div class="flex items-center space-x-2 mb-4">
+          <span class="text-emerald-400 text-lg">📝</span>
+          <h3 class="text-emerald-300 font-bold text-lg">メモ</h3>
+        </div>
+        <div class="text-gray-200 leading-relaxed">
+          <%= simple_format(@sake_log.memo) %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <div class="mt-6 flex flex-col sm:flex-row sm:items-center gap-3">
-  <%= link_to "編集", edit_sake_log_path(@sake_log),
-      class: "rounded-md px-5 py-3 bg-gray-400 hover:bg-gray-300 font-medium text-center w-full sm:w-auto" %>
 
-  <%= link_to "一覧に戻る", sake_logs_path,
-      class: "rounded-md px-5 py-3 bg-gray-400 hover:bg-gray-300 font-medium text-center w-full sm:w-auto" %>
+  <!-- アクションボタン -->
+  <div class="mt-8 flex flex-wrap gap-3 justify-end">
+    <%= link_to new_post_path(sake_log_id: @sake_log.id), class: "group px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-xl font-medium text-center text-sm shadow hover:from-yellow-400 hover:to-orange-400 hover:scale-105 transition-all duration-200 flex items-center justify-center" do %>
+      <span class="inline-flex items-center justify-center w-full">掲示板にシェア</span>
+    <% end %>
 
-  <%= button_to "削除", @sake_log, method: :delete,
-      data: { confirm: "本当に削除しますか？" },
-      class: "rounded-md px-5 py-3 bg-red-600 hover:bg-red-500 text-white font-medium text-center w-full sm:w-auto" %>
+    <%= link_to edit_sake_log_path(@sake_log), class: "group px-4 py-2 bg-gradient-to-r from-gray-400 to-gray-300 text-white rounded-xl font-medium text-center text-sm shadow hover:from-gray-300 hover:to-gray-400 hover:scale-105 transition-all duration-200 flex items-center justify-center" do %>
+      <span class="inline-flex items-center justify-center w-full">編集</span>
+    <% end %>
 
-  <%= link_to '掲示板にシェア', new_post_path(sake_log_id: @sake_log.id), class: 'px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700' %>
-</div>
-
+    <%= button_to sake_log_path(@sake_log), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "px-4 py-2 backdrop-blur-sm bg-red-500/20 border border-red-400/30 text-red-300 rounded-xl font-medium text-sm hover:bg-red-500/30 hover:scale-105 transition-all duration-200 flex items-center justify-center" do %>
+      <span class="inline-flex items-center justify-center w-full">削除</span>
+    <% end %>
+  </div>
 </div>

@@ -14,9 +14,9 @@
   <div class="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl p-6 mb-8 shadow-2xl">
     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
       <h1 class="text-3xl sm:text-4xl font-bold text-transparent bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text">
-        📋 記録一覧
+        記録一覧
       </h1>
-      <%= link_to new_sake_log_path, class: "group px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-2xl font-medium shadow-lg hover:from-emerald-400 hover:to-teal-400 hover:scale-105 hover:shadow-emerald-500/25 transition-all duration-300" do %>
+      <%= link_to new_sake_log_path, class: "group px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-2xl font-medium shadow-lg hover:from-yellow-400 hover:to-orange-400 hover:scale-105 hover:shadow-yellow-500/25 transition-all duration-300" do %>
         <span class="inline-flex items-center">
           新規作成
           <svg class="w-5 h-5 ml-2 group-hover:rotate-90 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -25,18 +25,81 @@
         </span>
       <% end %>
     </div>
+
+    <!-- 検索フォーム -->
+    <div class="mt-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+      <!-- キーワード検索 -->
+      <%= form_with url: sake_logs_path, method: :get, local: true, class: "flex items-center gap-2 max-w-md" do |f| %>
+        <%= f.text_field :q, value: params[:q], placeholder: "キーワード検索", 
+            class: "flex-1 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm text-white px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300" %>
+        <%= f.submit "検索", class: "rounded-2xl px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-white font-medium text-sm transition-all duration-200 hover:scale-105" %>
+        <% if params[:q].present? %>
+          <%= link_to 'クリア', sake_logs_path, class: 'rounded-2xl px-4 py-3 backdrop-blur-sm bg-white/10 border border-white/20 hover:bg-white/20 text-gray-200 hover:text-white text-sm font-medium transition-all duration-200' %>
+        <% end %>
+      <% end %>
+
+      <!-- 味覚による並び替え -->
+      <%= form_with url: sake_logs_path, method: :get, local: true, class: "flex flex-wrap items-center gap-2" do |f| %>
+        <%= f.hidden_field :q, value: params[:q] %>
+        
+        <span class="text-yellow-300 text-xs font-medium">📊 味覚で並び替え:</span>
+        
+        <!-- 味覚選択 -->
+        <%= f.select :taste_sort, 
+            options_for_select([
+              ['甘味', 'sweetness'],
+              ['酸味', 'sourness'], 
+              ['苦味', 'bitterness'],
+              ['旨味', 'umami'],
+              ['辛味', 'spiciness']
+            ], params[:taste_sort]),
+            { prompt: '味覚選択' },
+            { class: "rounded-lg border border-white/20 bg-white/10 backdrop-blur-sm text-white px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-yellow-400" } %>
+        
+        <!-- 並び順選択 -->
+        <%= f.select :taste_direction,
+            options_for_select([
+              ['降順', 'desc'],
+              ['昇順', 'asc']
+            ], params[:taste_direction] || 'desc'),
+            { prompt: '順序' },
+            { class: "rounded-lg border border-white/20 bg-white/10 backdrop-blur-sm text-white px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-yellow-400" } %>
+        
+        <!-- 適用ボタン -->
+        <%= f.submit "適用", class: "rounded-lg px-3 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-white font-medium text-xs transition-all duration-200" %>
+        
+        <!-- リセットボタン -->
+        <% if params[:taste_sort].present? || params[:taste_direction].present? %>
+          <%= link_to 'リセット', sake_logs_path(q: params[:q]), class: 'rounded-lg px-3 py-1 backdrop-blur-sm bg-white/10 border border-white/20 hover:bg-white/20 text-gray-200 hover:text-white text-xs font-medium transition-all duration-200' %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 
   <% if @sake_logs.any? %>
-    <div id="sake_logs" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <!-- 現在の並び替え状態表示 -->
+    <% if params[:taste_sort].present? && params[:taste_direction].present? %>
+      <div class="backdrop-blur-sm bg-yellow-500/15 border border-yellow-400/25 rounded-xl p-2 mb-4">
+        <div class="flex items-center space-x-1">
+          <span class="text-yellow-400 text-sm">📊</span>
+          <p class="text-yellow-200 font-medium text-xs">
+            <% taste_names = { 'sweetness' => '甘味', 'sourness' => '酸味', 'bitterness' => '苦味', 'umami' => '旨味', 'spiciness' => '辛味' } %>
+            <% direction_names = { 'desc' => '降順', 'asc' => '昇順' } %>
+            <strong><%= taste_names[params[:taste_sort]] %></strong><strong><%= direction_names[params[:taste_direction]] %></strong>で並び替え中
+          </p>
+        </div>
+      </div>
+    <% end %>
+
+    <div id="sake_logs" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">
       <% @sake_logs.each do |sake_log| %>
-        <div class="group backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-white/15 overflow-hidden">
-          <div class="p-6 min-h-[200px] flex flex-col">
+        <div class="group backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-white/15 overflow-hidden flex flex-col h-full">
+          <div class="p-6 flex-1 flex flex-col">
             <div class="flex-1">
               <%= render sake_log %>
             </div>
           </div>
-          <div class="p-4 border-t border-white/10 flex gap-3">
+          <div class="p-4 border-t border-white/10 flex gap-3 mt-auto">
             <%= link_to sake_log, class: "flex-1 text-center py-3 px-4 backdrop-blur-sm bg-white/10 border border-white/20 text-gray-200 rounded-xl font-medium text-sm hover:bg-white/20 hover:text-white transition-all duration-200" do %>
               <span class="inline-flex items-center">
                 詳細
@@ -54,7 +117,7 @@
   <% else %>
     <div class="text-center py-20">
       <div class="backdrop-blur-lg bg-white/5 border border-white/10 rounded-3xl p-12 max-w-md mx-auto">
-        <div class="text-6xl mb-4">🍶</div>
+        <div class="text-6xl mb-4 text-gray-400">○</div>
         <p class="text-xl text-gray-300 mb-4">まだ記録がありません</p>
         <p class="text-gray-400 mb-6">最初の日本酒記録を作成してみましょう！</p>
         <%= link_to new_sake_log_path, class: "inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-2xl font-medium hover:from-emerald-400 hover:to-teal-400 hover:scale-105 transition-all duration-300" do %>

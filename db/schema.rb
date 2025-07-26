@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_19_071232) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_22_062400) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -30,7 +30,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_19_071232) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "brand", limit: 30
-    t.string "taste", limit: 20
     t.text "memo"
     t.index ["sake_log_id"], name: "index_posts_on_sake_log_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -38,7 +37,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_19_071232) do
 
   create_table "sake_logs", force: :cascade do |t|
     t.string "name"
-    t.string "taste"
     t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
